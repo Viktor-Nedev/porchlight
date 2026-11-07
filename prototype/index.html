@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Porchlight — Prototype</title>
+  <meta name="theme-color" content="#0d0b1f" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DotGothic16&family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..900,0..100,0..1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <div class="stage">
+    <svg class="stage-mtns" viewBox="0 0 1600 300" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,300 L0,190 L120,120 L210,170 L330,70 L430,150 L540,100 L650,180 L780,60 L900,160 L1010,110 L1130,170 L1250,80 L1370,150 L1480,100 L1600,160 L1600,300Z" fill="#1a1638"/>
+      <path d="M0,300 L0,240 C300,200 500,260 800,230 C1100,200 1300,250 1600,220 L1600,300Z" fill="#110e26"/>
+    </svg>
+
+    <aside class="stage-side stage-left">
+      <a class="stage-back" href="../">← Back to the story</a>
+      <h1 class="stage-title">porchl<span class="stage-i">ı</span>ght</h1>
+      <p class="stage-lede">Interactive prototype. Tap through it the way a student would during a two-hour gap between classes.</p>
+      <p class="stage-label">Jump to a screen</p>
+      <ol class="jump" id="jump"></ol>
+      <button class="stage-reset" type="button" data-action="restart">↺ Restart</button>
+    </aside>
+
+    <div class="device" id="device">
+      <div class="app" id="app" aria-live="polite">
+        <div class="statusbar" aria-hidden="true">
+          <span class="sb-time">4:12</span>
+          <span class="sb-icons"><i class="sb-sig"></i><i class="sb-wifi"></i><i class="sb-bat"></i></span>
+        </div>
+        <div class="screens" id="screens"></div>
+        <nav class="tabbar" id="tabbar" aria-label="Main">
+          <button type="button" data-action="tab" data-to="map" class="tab"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Zm0 0v14m6-12v14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Lights</span></button>
+          <button type="button" data-action="light-start" class="tab tab-lamp" aria-label="Light your lamp"><svg viewBox="0 0 32 32"><use href="#i-lamp"/></svg></button>
+          <button type="button" data-action="tab" data-to="sky" class="tab"><svg viewBox="0 0 24 24"><path d="m12 3 1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4L12 3Zm6 11 .9 2.1L21 17l-2.1.9L18 20l-.9-2.1L15 17l2.1-.9L18 14ZM6 15l.7 1.6 1.6.7-1.6.7L6 19.6l-.7-1.6-1.6-.7 1.6-.7L6 15Z" fill="currentColor"/></svg><span>Sky</span></button>
+        </nav>
+        <div class="toast" id="toast" role="status"></div>
+      </div>
+    </div>
+
+    <aside class="stage-side stage-right">
+      <p class="hand">try lighting your own lamp →<br/>the amber button</p>
+      <p class="stage-note">Illustrative map and sample students. Built for UXDC Designathon 2.0, theme: Human Connection.</p>
+    </aside>
+  </div>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-lamp" viewBox="0 0 32 32">
+      <path d="M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M10 6h12l3 7H7z" fill="currentColor" opacity=".9"/>
+      <path d="M16 13c-5 0-7.5 3.5-7.5 7.5 0 3.3 2.3 5.6 4.3 7h6.4c2-1.4 4.3-3.7 4.3-7 0-4-2.5-7.5-7.5-7.5z" fill="#ffc35c"/>
+      <circle cx="16" cy="20.5" r="3" fill="#fff3c9"/>
+      <rect x="12.5" y="27.5" width="7" height="2.5" rx="1" fill="currentColor"/>
+    </symbol>
+  </svg>
+
+  <script src="../js/vendor/gsap.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
