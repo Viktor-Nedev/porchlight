@@ -63,7 +63,7 @@
       .from(".title .ch", { yPercent: 115, rotate: 8, opacity: 0, stagger: 0.045, duration: 1.25, ease: "expo.out" })
       .from(".i-dot", { scale: 0, duration: 0.6, ease: "back.out(3)" }, 0.6)
       .from(".eyebrow", { y: 16, opacity: 0, duration: 0.8, ease: "expo.out" }, 0.2)
-      .from([".hero-tag", ".hero-sub"], { y: 22, opacity: 0, stagger: 0.12, duration: 1, ease: "expo.out" }, 0.62)
+      .from([".hero-tag", ".hero-card"], { y: 22, opacity: 0, stagger: 0.12, duration: 1, ease: "expo.out" }, 0.62)
       .from(".layer", { yPercent: 3, stagger: 0.05, duration: 1.8, ease: "expo.out" }, 0)
       .from(".hero-wick", { y: 40, opacity: 0, duration: 1.2, ease: "expo.out" }, 0.5)
       .from([".scroll-cue", ".hero-clock", ".nav"], { opacity: 0, duration: 0.8 }, 1);
@@ -249,18 +249,14 @@
     gsap.set(".bubble", { opacity: 0, scale: 0.3 });
     const lines = qa(".moment-lines li");
     const mt = gsap.timeline({ defaults: { ease: "none" }, scrollTrigger: { trigger: ".moment", start: "top top", end: "bottom bottom", scrub: 0.6 } });
-    mt.from(".moment-stage", { yPercent: 8, opacity: 0, scale: 0.95, duration: 0.1 }, 0)
-      .from(".mw", { y: 30, opacity: 0, stagger: 0.03, duration: 0.08, ease: "power2.out" }, 0.03);
+    mt.from(".moment-stage", { opacity: 0, duration: 0.08 }, 0);
     lines.forEach((li, i) => {
       const t = 0.08 + i * 0.2;
       mt.fromTo(li, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.06, ease: "power2.out" }, t);
       if (i < lines.length - 1) mt.to(li, { opacity: 0, y: -30, duration: 0.05 }, t + 0.15);
     });
-    mt.to(".mw", { filter: "brightness(.6) saturate(.7)", duration: 0.3 }, 0.3)
-      .to(".bubble", { opacity: 1, scale: 1, stagger: 0.06, duration: 0.06, ease: "back.out(2.2)" }, 0.5)
-      .to(".mw-b", { rotate: -2, duration: 0.2 }, 0.62)
+    mt.to(".bubble", { opacity: 1, scale: 1, stagger: 0.06, duration: 0.06, ease: "back.out(2.2)" }, 0.5)
       .to({}, { duration: 0.12 }, 0.88);
-    gsap.to(".mw-c", { y: -3, duration: 2.2, repeat: -1, yoyo: true, ease: "sine.inOut" });
   }
 
   /* ------------------------------------------------ 3. boards: scramble + count */
@@ -292,8 +288,7 @@
     gsap.set(".idea-wick", { yPercent: 100 });
     const it = gsap.timeline({ defaults: { ease: "none" }, scrollTrigger: { trigger: ".idea", start: "top top", end: "bottom bottom", scrub: 0.8 } });
     it.fromTo(".idea-window", { clipPath: "inset(24% 36% 24% 36% round 999px 999px 18px 18px)" }, { clipPath: "inset(0% 0% 0% 0% round 0px 0px 0px 0px)", duration: 0.5, ease: "power2.inOut" }, 0)
-      .fromTo(".idea-img", { scale: 1.35, filter: "brightness(.6)" }, { scale: 1, filter: "brightness(1)", duration: 0.55, ease: "power2.out" }, 0)
-      .to(".idea-img", { yPercent: -4, duration: 0.45 }, 0.55)
+      .fromTo(".idea-img", { scale: 1.08, filter: "brightness(.65)" }, { scale: 1, filter: "brightness(1)", duration: 0.55, ease: "power2.out" }, 0)
       .to(".idea-shade", { opacity: 1, duration: 0.2 }, 0.42)
       .from(".idea-copy .label", { opacity: 0, y: 20, duration: 0.08 }, 0.46)
       .from(SplitText.create("#ideaTitle", { type: "words" }).words, { yPercent: 90, opacity: 0, rotate: 4, stagger: 0.015, duration: 0.1, ease: "power3.out" }, 0.5)

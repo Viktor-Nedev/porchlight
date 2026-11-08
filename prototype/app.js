@@ -32,6 +32,7 @@
     shuffle: '<path d="M4 7h3.5c4 0 5 10 9 10H20M4 17h3.5c1.5 0 2.6-1.4 3.4-3M17 4l3 3-3 3M17 14l3 3-3 3M13.2 10c.8-1.6 1.9-3 3.3-3H20"/>',
     heart: '<path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10C19.5 15.6 12 20 12 20z"/>',
     check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+    snow: '<path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/><path d="M9.5 4.5 12 7l2.5-2.5M9.5 19.5 12 17l2.5 2.5"/>',
   };
   const icon = (k, cls = "") => `<svg class="ic ${cls}" viewBox="0 0 24 24" aria-hidden="true">${P[k]}</svg>`;
 
@@ -127,7 +128,13 @@
 
   /* ------------------------------------------------ helpers */
   const face = (v) => FACES.find((f) => f.v === v) || FACES[2];
-  const avatar = (p, size = 44) => `<span class="av" style="--c:${p.color};--s:${size}px">${p.name[0]}</span>`;
+  /* Add an id here once its portrait exists in assets/img/avatars/<id>.webp (see docs/IMAGE_PROMPTS_V2.md) */
+  const AVATARS = [];
+  const avatar = (p, size = 44, ring = null) => {
+    const id = p.id || p.name.toLowerCase();
+    const r = ring == null ? "" : `<svg class="av-ring" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" class="avr-bg"/><circle cx="20" cy="20" r="18.5" class="avr-fg" pathLength="100" style="stroke-dasharray:${Math.round(ring * 100)} 100"/></svg>`;
+    return `<span class="av" style="--c:${p.color};--s:${size}px"><span class="av-l">${p.name[0]}</span>${AVATARS.includes(id) ? `<img src="${IMG}avatars/${id}.webp" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()" />` : ""}${r}</span>`;
+  };
   const spotLabel = (id) => `${SPOTS[id].name} · ${SPOTS[id].sub}`;
   const gapAvg = () => { const a = S.embers.map((e) => e.r - e.g); return a.reduce((x, y) => x + y, 0) / a.length; };
   function toast(html, ms = 2800) {
@@ -142,59 +149,117 @@
       ${FACES.map((f) => `<button class="face${sel === f.v ? " on" : ""}" role="radio" aria-checked="${sel === f.v}" aria-label="${f.t}" data-action="${action}" data-v="${f.v}">${lanternFace(f.v)}<small>${f.t}</small></button>`).join("")}
     </div>`;
 
-  /* ------------------------------------------------ campus map (SVG) */
+  /* ------------------------------------------------ campus map (SVG, pseudo-isometric) */
+  const BUILDINGS = [
+    { x: 46, y: 92, w: 76, h: 46, d: 16, label: "TFDL", tall: 3 },
+    { x: 240, y: 92, w: 86, h: 38, d: 14, label: "ICT", tall: 4 },
+    { x: 128, y: 204, w: 96, h: 40, d: 12, label: "MACHALL", tall: 2, dome: true },
+    { x: 30, y: 320, w: 88, h: 40, d: 12, label: "KINESIOLOGY", tall: 2 },
+    { x: 232, y: 290, w: 90, h: 34, d: 12, label: "SCIENCE TH.", tall: 2 },
+    { x: 244, y: 402, w: 84, h: 40, d: 14, label: "ENGINEERING", tall: 3 },
+  ];
+  const PATHS = [[176, 236, 84, 128], [176, 236, 282, 120], [176, 236, 74, 352], [176, 236, 276, 318], [276, 318, 286, 430], [74, 352, 92, 470], [176, 236, 176, 560]];
+  function rng(seed) { let a = seed; return () => ((a = (a * 16807) % 2147483647) / 2147483647); }
   function mapSVG(opts = {}) {
-    const lights = LIGHTS.filter((l) => S.filter === "all" || l.vibe === S.filter);
-    const b = (x, y, w, h, label, r = 10) => `
-      <g class="bld"><rect x="${x + 4}" y="${y + 6}" width="${w}" height="${h}" rx="${r}" class="bld-shadow"/><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}"/>
-      <rect class="bld-roof" x="${x + 4}" y="${y + 4}" width="${w - 8}" height="${Math.min(10, h / 4)}" rx="4"/>
-      ${Array.from({ length: Math.floor((w - 12) / 12) }, (_, i) => `<rect class="bwin" x="${x + 8 + i * 12}" y="${y + h - 16}" width="6" height="6" rx="1" style="animation-delay:${(i * 0.7) % 3}s"/>`).join("")}
-      <text x="${x + w / 2}" y="${y + h + 13}" class="bld-label">${label}</text></g>`;
-    const tree = (x, y) => `<g class="tree"><path d="M${x},${y - 14} l7,12 h-14z"/><path d="M${x},${y - 8} l9,13 h-18z"/><path d="M${x - 5},${y - 9} q5,-2 10,0" class="tree-snow"/></g>`;
-    const trees = [[24, 60], [40, 74], [330, 60], [340, 210], [20, 230], [200, 400], [214, 412], [330, 510], [150, 520], [30, 420]].map(([x, y]) => tree(x, y)).join("");
-    const pinIcon = (k) => `<g class="pin-ic" transform="translate(-9,-9) scale(.75)">${P[k]}</g>`;
-    const pins = lights.map((l) => {
-      const s = SPOTS[l.spot];
-      const sel = opts.selected === l.id ? " is-sel" : "";
-      return `<g class="pin${sel}" data-action="open" data-id="${l.id}" transform="translate(${s.x},${s.y})" tabindex="0" role="button" aria-label="${l.name}, ${VIBES[l.vibe].long} at ${spotLabel(l.spot)}">
-        <circle class="pin-glow" r="34"/><circle class="pin-ring" r="16"/>
-        <circle class="pin-dot" r="15" style="fill:${l.color}"/>
-        ${pinIcon(l.vibe)}
+    const R = rng(11);
+    const lights = opts.only ? LIGHTS.filter((l) => l.id === opts.only) : LIGHTS.filter((l) => S.filter === "all" || l.vibe === S.filter);
+    const bld = (b) => {
+      const { x, y, w, h, d } = b;
+      const top = `M${x},${y} l${d},${-d * 0.7} h${w} l${-d},${d * 0.7} z`;
+      const side = `M${x + w},${y} l${d},${-d * 0.7} v${h} l${-d},${d * 0.7} z`;
+      const cols = Math.floor((w - 10) / 9), rows = Math.max(1, Math.floor((h - 10) / 9));
+      let wins = "";
+      for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+        const lit = R() < 0.42;
+        wins += `<rect x="${x + 6 + c * 9}" y="${y + 6 + r * 9}" width="5" height="5" rx=".8" class="${lit ? "bw-on" : "bw-off"}"${lit ? ` style="animation-delay:${(R() * 4).toFixed(2)}s"` : ""}/>`;
+      }
+      const dome = b.dome ? `<path d="M${x + w / 2 - 14},${y - 4} a14,10 0 0 1 28,0 z" class="b-dome"/>` : "";
+      return `<g class="bld">
+        <ellipse cx="${x + w / 2 + 8}" cy="${y + h + 4}" rx="${w / 2 + 14}" ry="7" class="b-shadow"/>
+        <rect x="${x}" y="${y}" width="${w}" height="${h}" class="b-front"/>
+        <path d="${side}" class="b-side"/><path d="${top}" class="b-top"/>
+        <path d="M${x + 3},${y - 1} l${d - 2},${-d * 0.7 + 1} h${w - 6}" class="b-snow"/>
+        ${dome}${wins}
+        <g transform="translate(${x + w / 2},${y + h + 15})"><rect x="${-b.label.length * 3 - 7}" y="-7" width="${b.label.length * 6 + 14}" height="13" rx="6.5" class="b-tag"/><text y="3" class="bld-label">${b.label}</text></g>
       </g>`;
+    };
+    const lamps = PATHS.map(([x1, y1, x2, y2]) => {
+      const len = Math.hypot(x2 - x1, y2 - y1), n = Math.floor(len / 38);
+      let o = "";
+      for (let i = 1; i <= n; i++) {
+        const t = i / (n + 1), px = x1 + (x2 - x1) * t, py = y1 + (y2 - y1) * t;
+        const nx = -(y2 - y1) / len * 9, ny = (x2 - x1) / len * 9;
+        o += `<g class="lamp" transform="translate(${(px + nx).toFixed(1)},${(py + ny).toFixed(1)})"><circle r="9" class="lamp-glow"/><circle r="1.8" class="lamp-dot"/></g>`;
+      }
+      return o;
     }).join("");
-    const you = SPOTS.machall;
-    return `<svg class="map" viewBox="0 0 360 540" preserveAspectRatio="xMidYMid slice" aria-label="Illustrated campus map at night">
+    const tree = (x, y, s = 1) => `<g class="tree" transform="translate(${x},${y}) scale(${s})"><ellipse cx="2" cy="1" rx="7" ry="2.4" class="t-shadow"/><path d="M0,-18 l6,9 h-12z M0,-12 l8,11 h-16z"/><path d="M-4,-11 q4,-2 8,0 M-6,-4 q6,-2.4 12,0" class="tree-snow"/></g>`;
+    const trees = [[24, 62], [38, 76], [16, 84], [330, 60], [344, 74], [342, 212], [20, 232], [12, 250], [200, 402], [214, 414], [334, 512], [150, 522], [30, 424], [226, 180], [118, 296], [330, 372], [210, 470]].map(([x, y], i) => tree(x, y, 0.8 + (i % 3) * 0.15)).join("");
+    const pin = (l) => {
+      const s = SPOTS[l.spot], sel = opts.selected === l.id ? " is-sel" : "";
+      return `<g class="pin${sel}" data-action="open" data-id="${l.id}" transform="translate(${s.x},${s.y})" tabindex="0" role="button" aria-label="${l.name}, ${VIBES[l.vibe].long} at ${spotLabel(l.spot)}">
+        <circle class="pin-glow" r="30"/><circle class="pin-ring" r="13" style="stroke:${l.color}"/>
+        <ellipse cx="0" cy="3" rx="7" ry="2.4" class="pin-shadow"/>
+        <g class="pin-body"><path d="M0,0 C-4,-6 -13,-11 -13,-21 a13,13 0 0 1 26,0 C13,-11 4,-6 0,0z" style="fill:${l.color}"/>
+        <circle cy="-21" r="9.5" class="pin-face"/><text y="-17.4" class="pin-letter">${l.name[0]}</text>
+        <g transform="translate(9,-32)"><circle r="7" class="pin-badge"/><g transform="translate(-5,-5) scale(.42)" class="pin-ic">${P[l.vibe]}</g></g></g>
+      </g>`;
+    };
+    const you = SPOTS.machall, yx = you.x - 30, yy = you.y + 36;
+    let route = "";
+    if (opts.route) {
+      const h = SPOTS[S.host.spot];
+      route = `<path class="m-route-bg" d="M${yx},${yy} L176,${yy} L176,236 L${h.x},${h.y}"/><path class="m-route" d="M${yx},${yy} L176,${yy} L176,236 L${h.x},${h.y}"/>`;
+    }
+    return `<svg class="map" viewBox="${opts.viewBox || "0 0 360 540"}" preserveAspectRatio="xMidYMid slice" aria-label="Illustrated campus map at night">
       <defs>
         <radialGradient id="pg"><stop offset="0" stop-color="#ffc35c" stop-opacity=".55"/><stop offset="1" stop-color="#ffc35c" stop-opacity="0"/></radialGradient>
-        <pattern id="snowdots" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="3" cy="4" r=".7" fill="#3a3478"/><circle cx="10" cy="11" r=".5" fill="#3a3478"/></pattern>
+        <radialGradient id="lg"><stop offset="0" stop-color="#ffd27a" stop-opacity=".5"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient>
+        <linearGradient id="ground" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#26215a"/><stop offset="1" stop-color="#191541"/></linearGradient>
+        <linearGradient id="ice" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3b4a8c"/><stop offset=".5" stop-color="#2a3474"/><stop offset="1" stop-color="#3b4a8c"/></linearGradient>
+        <pattern id="snowdots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="3" cy="4" r=".8" fill="#4a4390"/><circle cx="12" cy="13" r=".6" fill="#3d3780"/><circle cx="15" cy="3" r=".5" fill="#4a4390"/></pattern>
+        <filter id="soft"><feGaussianBlur stdDeviation="6"/></filter>
       </defs>
-      <rect width="360" height="540" class="map-ground"/>
-      <rect width="360" height="540" fill="url(#snowdots)"/>
-      <path class="map-snow" d="M0,0 h360 v40 C260,60 120,30 0,50Z"/>
-      <path class="path-edge" d="M176,236 L84,128 M176,236 L282,120 M176,236 L74,352 M176,236 L276,318 L286,430 M74,352 L92,470 M176,236 L176,540"/>
-      <path class="path" d="M176,236 L84,128 M176,236 L282,120 M176,236 L74,352 M176,236 L276,318 L286,430 M74,352 L92,470 M176,236 L176,540"/>
-      <path class="rail" d="M-10,500 L370,440"/>
-      <path class="rail-ties" d="M-10,500 L370,440"/>
-      ${b(46, 92, 76, 58, "TFDL")}${b(240, 92, 86, 44, "ICT")}${b(130, 204, 92, 50, "MACHALL", 14)}
-      ${b(30, 320, 88, 48, "KINESIOLOGY")}${b(232, 290, 90, 42, "SCIENCE TH.")}${b(244, 402, 84, 46, "ENGINEERING")}
-      <rect x="54" y="478" width="80" height="12" rx="4" class="platform"/><text x="94" y="505" class="bld-label">UNIVERSITY STN</text>
+      <rect x="-40" y="-40" width="440" height="640" fill="url(#ground)"/>
+      <rect x="-40" y="-40" width="440" height="640" fill="url(#snowdots)"/>
+      <g opacity=".5" filter="url(#soft)"><ellipse cx="60" cy="40" rx="80" ry="30" fill="#33307a"/><ellipse cx="300" cy="250" rx="60" ry="40" fill="#2f2b70"/><ellipse cx="120" cy="520" rx="90" ry="34" fill="#302b72"/></g>
+      <ellipse cx="318" cy="226" rx="34" ry="18" fill="url(#ice)" class="pond"/><path d="M296,222 q10,-6 22,-2 M310,232 q8,-3 16,0" class="ice-shine"/>
+      <g class="paths">${PATHS.map(([a, b, c, d]) => `<path d="M${a},${b} L${c},${d}" class="path-edge"/>`).join("")}${PATHS.map(([a, b, c, d]) => `<path d="M${a},${b} L${c},${d}" class="path"/>`).join("")}${PATHS.map(([a, b, c, d]) => `<path d="M${a},${b} L${c},${d}" class="path-dash"/>`).join("")}</g>
+      <g class="rail-g"><path class="rail-bed" d="M-20,504 L380,436"/><path class="rail" d="M-20,500 L380,432"/><path class="rail" d="M-20,507 L380,439"/><path class="rail-ties" d="M-20,503.5 L380,435.5"/>
+        <g transform="translate(150,470) rotate(-9.6)"><rect x="-34" y="-7" width="68" height="13" rx="4" class="train-body"/><rect x="-28" y="-4" width="10" height="5" rx="1" class="train-win"/><rect x="-14" y="-4" width="10" height="5" rx="1" class="train-win"/><rect x="0" y="-4" width="10" height="5" rx="1" class="train-win"/><rect x="14" y="-4" width="10" height="5" rx="1" class="train-win"/><circle cx="33" cy="0" r="2" class="train-light"/></g></g>
+      <g transform="translate(94,486) rotate(-9.6)"><rect x="-42" y="-6" width="84" height="11" rx="3" class="platform"/></g>
+      <text x="62" y="526" class="bld-label station">UNIVERSITY STN</text>
+      ${route}
+      ${lamps}
+      ${BUILDINGS.map(bld).join("")}
       ${trees}
-      <g class="you" transform="translate(${you.x - 34},${you.y + 34})"><circle r="14" class="you-pulse"/><circle r="6" class="you-dot"/></g>
-      ${pins}
+      <g class="you" transform="translate(${yx},${yy})"><path d="M0,0 L-11,-24 A26,26 0 0 1 11,-24 Z" class="you-cone"/><circle r="15" class="you-pulse"/><circle r="6.5" class="you-dot"/></g>
+      ${lights.map(pin).join("")}
     </svg>`;
   }
+  const mapChrome = (n) => `
+    <div class="map-chrome" aria-hidden="true">
+      <span class="live"><i></i>LIVE · ${n} on</span>
+      <span class="legend"><i></i> Lights fade in 15–90 min</span>
+      <span class="zoom"><b>+</b><b>−</b></span>
+      <span class="compass">N</span>
+    </div>`;
 
   /* ------------------------------------------------ screens */
   const SCREENS = {
     welcome: { tab: false, label: "Welcome", render: () => `
       <section class="scr scr-welcome">
-        <div class="wl-sky"><span class="wl-moon"></span><span class="wl-stars"></span></div>
+        <div class="wl-art"><img src="${IMG}campus-night.webp" alt="" width="2048" height="1144" /><span class="wl-fade"></span></div>
         <div class="wl-wick"><span class="wl-glow"></span><img src="${IMG}mascot-wick.webp" alt="Wick, the Porchlight lantern, waving hello" width="501" height="768" /></div>
-        <h1 class="wl-title">porchl<span>ı</span>ght</h1>
-        <p class="wl-tag">Leave a light on.</p>
-        <p class="wl-copy">See who on campus is open to company right now, and let people know when you are too.</p>
-        <button class="btn-primary" data-action="go" data-to="map">Continue with your campus email</button>
-        <p class="wl-fine">${icon("shield", "xs")} Students &amp; staff only · first name only · lights fade on their own</p>
+        <div class="wl-body">
+          <span class="wl-pill">${icon("pin", "xs")} University of Calgary</span>
+          <h1 class="wl-title">porchl<span>ı</span>ght</h1>
+          <p class="wl-tag">Leave a light on.</p>
+          <p class="wl-copy">See who on campus is open to company right now, and let people know when you are too.</p>
+          <div class="wl-dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+          <button class="btn-primary" data-action="go" data-to="map"><span class="btn-mail">@</span> Continue with campus email</button>
+          <p class="wl-fine">${icon("shield", "xs")}Students &amp; staff only · first name only · lights fade on their own</p>
+        </div>
       </section>` },
 
     map: { tab: "map", label: "Lights map", render: () => {
@@ -202,34 +267,46 @@
       return `
       <section class="scr scr-map">
         <header class="map-head">
-          <div><p class="hi">Good evening, Alex</p><h2><b>${lights.length}</b> light${lights.length === 1 ? "" : "s"} on near you</h2></div>
+          <span class="me-av"><img src="${IMG}wick-3.webp" alt="" /></span>
+          <div class="mh-text"><p class="hi">Good evening, Alex</p><h2><b>${lights.length}</b> light${lights.length === 1 ? "" : "s"} on near you</h2></div>
+          <span class="weather">${icon("snow", "xs")}−6°</span>
           <button class="icon-btn" data-action="toast" data-msg="Block, report and “I have to run” are always one tap away." aria-label="Safety">${icon("shield")}</button>
         </header>
         <div class="chips" role="tablist" aria-label="Filter by vibe">
-          ${["all", "food", "study", "coffee", "company", "walk"].map((f) => `<button class="chip${S.filter === f ? " on" : ""}" data-action="filter" data-f="${f}" aria-label="${f === "all" ? "All" : VIBES[f].t}">${f === "all" ? "All" : icon(f)}</button>`).join("")}
+          ${["all", "food", "study", "coffee", "company", "walk"].map((f) => `<button class="chip${S.filter === f ? " on" : ""}" data-action="filter" data-f="${f}" aria-label="${f === "all" ? "All" : VIBES[f].t}">${f === "all" ? "All" : icon(f)}${f !== "all" && S.filter === f ? `<span>${VIBES[f].t}</span>` : ""}</button>`).join("")}
         </div>
-        <div class="map-wrap">${mapSVG()}</div>
+        <div class="map-wrap">${mapSVG()}${mapChrome(lights.length)}</div>
+        <div class="cards-head"><b>Nearby</b><span class="mono">sorted by walk time</span></div>
         <div class="cards" aria-label="Lights near you">
-          ${lights.length ? lights.map((l) => `
-            <button class="lcard" data-action="open" data-id="${l.id}">
-              ${avatar(l, 38)}
-              <span class="lc-main"><b>${l.name} ${icon(l.vibe, "inline")}</b><span>${l.note}</span><small>${SPOTS[l.spot].name} · ${l.walk} min walk · ${l.left} min left</small></span>
+          ${lights.length ? lights.slice().sort((a, b) => a.walk - b.walk).map((l) => `
+            <button class="lcard" data-action="open" data-id="${l.id}" style="--c:${l.color}">
+              <span class="lc-top">${avatar(l, 40, l.left / 60)}<span class="lc-who"><b>${l.name}</b><small>${l.prog}</small></span><span class="lc-vibe">${icon(l.vibe)}</span></span>
+              <span class="lc-note">“${l.note}”</span>
+              <span class="lc-meta"><span>${icon("walk", "xs")}${l.walk} min</span><span>${icon("timer", "xs")}${l.left} min left</span><span class="seats">${Array.from({ length: l.seats + 1 }, (_, i) => `<i class="${i === 0 ? "taken" : ""}"></i>`).join("")}</span></span>
             </button>`).join("") : `<p class="empty">No lights like that right now. Why not light your own?</p>`}
         </div>
       </section>`; } },
 
-    detail: { tab: false, label: "A light", render: () => { const h = S.host; return `
+    detail: { tab: false, label: "A light", render: () => { const h = S.host; const seatsTotal = h.seats + 2; return `
       <section class="scr scr-detail">
         <div class="map-wrap dim">${mapSVG({ selected: h.id })}</div>
-        <div class="sheet">
+        <div class="sheet" style="--c:${h.color}">
           <span class="grab"></span>
-          <div class="dt-head">${avatar(h, 56)}<div><h2>${h.name}</h2><p>${h.prog}</p></div><span class="dt-vibe" style="--c:${h.color}">${icon(h.vibe)}<small>${VIBES[h.vibe].t}</small></span></div>
+          <div class="dt-head">${avatar(h, 58, h.left / 60)}<div><h2>${h.name}</h2><p>${h.prog}</p></div><span class="dt-vibe">${icon(h.vibe)}<small>${VIBES[h.vibe].t}</small></span></div>
           <p class="dt-note">“${h.note}”</p>
+          <div class="dt-table">
+            <svg viewBox="0 0 160 84" aria-hidden="true">
+              <rect x="24" y="30" width="112" height="25" rx="8" class="tb-shadow"/><rect x="20" y="25" width="120" height="30" rx="9" class="tb-top"/><path d="M30 33 h50 M86 33 h40 M34 46 h70 M110 46 h20" class="tb-grain"/>
+              ${Array.from({ length: seatsTotal }, (_, i) => { const top = i % 2 === 0, col = Math.floor(i / 2), n = Math.ceil(seatsTotal / 2), x = 22 + (116 / (n + 1)) * (col + 1), y = top ? 12 : 72, taken = i < 2; return taken ? `<circle cx="${x}" cy="${y}" r="9" class="seat-taken" style="fill:${i === 0 ? h.color : "#8f86c4"}"/><text x="${x}" y="${y + 3.4}" class="seat-l">${i === 0 ? h.name[0] : "J"}</text>` : `<circle cx="${x}" cy="${y}" r="9" class="seat-free"/><path d="M${x - 3.5},${y} h7 M${x},${y - 3.5} v7" class="seat-plus"/>`; }).join("")}
+              <circle cx="52" cy="40" r="5" class="tb-cup"/><circle cx="52" cy="40" r="2.6" class="tb-coffee"/><rect x="96" y="33" width="20" height="14" rx="2" class="tb-book" transform="rotate(-8 106 40)"/><path d="M106 34 v13" class="tb-spine" transform="rotate(-8 106 40)"/>
+            </svg>
+            <div><b>${h.seats} seat${h.seats > 1 ? "s" : ""} free</b><small>${h.name} + Jordan are here</small></div>
+          </div>
           <div class="dt-ask"><span>Ask me about</span><b>${h.ask}</b></div>
           <ul class="dt-meta">
-            <li>${icon("pin")}${spotLabel(h.spot)} · ${h.walk} min walk</li>
-            <li>${icon("timer")}${h.left} min left</li>
-            <li>${icon("seat")}${h.seats} seat${h.seats > 1 ? "s" : ""} free</li>
+            <li>${icon("pin")}<span><b>${SPOTS[h.spot].name}</b><small>${SPOTS[h.spot].sub}</small></span></li>
+            <li>${icon("walk")}<span><b>${h.walk} min</b><small>walk</small></span></li>
+            <li>${icon("timer")}<span><b>${h.left} min</b><small>left</small></span></li>
           </ul>
           <button class="btn-primary" data-action="go" data-to="forecast">I’m coming over</button>
           <button class="btn-text" data-action="go" data-to="map">Not now</button>
@@ -248,15 +325,14 @@
 
     onway: { tab: false, label: "On the way + Spark", render: () => { const h = S.host; return `
       <section class="scr scr-onway">
-        <header class="ow-head">${avatar(h, 40)}<div><b>${h.name} knows you’re coming</b><small>${spotLabel(h.spot)}</small></div></header>
-        <div class="route">
-          <svg viewBox="0 0 300 120" aria-hidden="true"><path class="route-bg" d="M20,96 C80,96 90,30 150,40 C210,50 220,20 280,24"/><path class="route-path" d="M20,96 C80,96 90,30 150,40 C210,50 220,20 280,24"/><circle class="route-you" cx="20" cy="96" r="7"/><circle class="route-host-glow" cx="280" cy="24" r="18"/><circle class="route-host" cx="280" cy="24" r="9" style="fill:${h.color}"/></svg>
-          <p class="eta"><b>${h.walk} min</b> · ${h.walk * 80} m · indoors via the +15 walkway</p>
+        <header class="ow-head">${avatar(h, 42, h.left / 60)}<div><b>${h.name} knows you’re coming</b><small>${spotLabel(h.spot)}</small></div><span class="ow-live"><i></i>live</span></header>
+        <div class="route-map">${mapSVG({ only: h.id, route: true, viewBox: "60 150 250 240" })}
+          <div class="eta-chip"><b>${h.walk} min</b><span>${h.walk * 80} m · indoors via the walkway</span></div>
         </div>
         <button class="spark" data-action="flip" aria-label="Reveal your shared Spark">
           <span class="spark-inner">
-            <span class="spark-face spark-front">${icon("spark", "lg")}<b>Your shared Spark</b><small>tap to reveal</small></span>
-            <span class="spark-face spark-back"><small>You both got</small><b id="sparkText">${SPARKS[S.spark]}</b></span>
+            <span class="spark-face spark-front"><span class="sp-stamp">${icon("spark", "lg")}</span><b>Your shared Spark</b><small>tap to reveal</small></span>
+            <span class="spark-face spark-back"><small>You both got</small><b id="sparkText">${SPARKS[S.spark]}</b><span class="sp-num mono">SPARK ${String(S.spark + 1).padStart(2, "0")} / ${String(SPARKS.length).padStart(2, "0")}</span></span>
           </span>
         </button>
         <button class="btn-text shuffle" data-action="shuffle">${icon("shuffle", "inline")} Another Spark</button>
@@ -302,44 +378,52 @@
       S.embers.forEach((e) => (warm[e.spot] = (warm[e.spot] || 0) + 1));
       const stars = S.embers.map((e, i) => {
         const a = (i / n) * Math.PI * 2 - Math.PI / 2, rr = 78 + (i % 2) * 34;
-        return { ...e, x: 160 + Math.cos(a) * rr, y: 130 + Math.sin(a) * rr * 0.8 };
+        return { ...e, x: 160 + Math.cos(a) * rr, y: 124 + Math.sin(a) * rr * 0.78 };
       });
       const avg = gapAvg();
+      const maxW = Math.max(...Object.values(warm));
       return `
       <section class="scr scr-sky">
-        <header class="sky-head"><p class="eyebrow">Fall semester</p><h2>Your night sky</h2></header>
-        <svg class="sky-svg" viewBox="0 0 320 260" aria-label="Constellation of people you’ve kindled with">
-          ${Array.from({ length: 40 }, (_, i) => `<circle class="bgstar" cx="${(i * 73) % 320}" cy="${(i * 41) % 260}" r="${(i % 3) * 0.4 + 0.5}" style="animation-delay:${(i % 7) * 0.4}s"/>`).join("")}
-          ${stars.map((s) => `<line class="sky-line${s.new ? " is-new" : ""}" x1="160" y1="130" x2="${s.x}" y2="${s.y}"/>`).join("")}
-          ${stars.map((s, i) => i ? `<line class="sky-line faint" x1="${stars[i - 1].x}" y1="${stars[i - 1].y}" x2="${s.x}" y2="${s.y}"/>` : "").join("")}
-          <circle class="sky-me" cx="160" cy="130" r="9"/><text class="sky-name me" x="160" y="152">you</text>
-          ${stars.map((s) => `<g class="sky-star${s.new ? " is-new" : ""}"><circle cx="${s.x}" cy="${s.y}" r="${4 + s.r}"/><text class="sky-name" x="${s.x}" y="${s.y + 18 + s.r}">${s.name}</text></g>`).join("")}
-        </svg>
+        <header class="sky-head"><div><p class="eyebrow">Fall semester · week 9</p><h2>Your night sky</h2></div><span class="streak">${icon("spark", "xs")}3-week streak</span></header>
+        <div class="sky-card">
+          <img class="sky-mtn" src="${IMG}layer-2-rockies.webp" alt="" />
+          <svg class="sky-svg" viewBox="0 0 320 250" aria-label="Constellation of people you’ve kindled with">
+            ${Array.from({ length: 46 }, (_, i) => `<circle class="bgstar" cx="${(i * 73) % 320}" cy="${(i * 41) % 200}" r="${(i % 3) * 0.4 + 0.5}" style="animation-delay:${(i % 7) * 0.4}s"/>`).join("")}
+            ${stars.map((s) => `<line class="sky-line${s.new ? " is-new" : ""}" x1="160" y1="124" x2="${s.x}" y2="${s.y}"/>`).join("")}
+            ${stars.map((s, i) => i ? `<line class="sky-line faint" x1="${stars[i - 1].x}" y1="${stars[i - 1].y}" x2="${s.x}" y2="${s.y}"/>` : "").join("")}
+            <circle class="sky-me-glow" cx="160" cy="124" r="20"/><circle class="sky-me" cx="160" cy="124" r="9"/><text class="sky-name me" x="160" y="146">you</text>
+            ${stars.map((s) => `<g class="sky-star${s.new ? " is-new" : ""}"><circle cx="${s.x}" cy="${s.y}" r="${4 + s.r}"/><text class="sky-name" x="${s.x}" y="${s.y + 18 + s.r}">${s.name}</text></g>`).join("")}
+          </svg>
+        </div>
         <div class="kpis">
-          <div><b>${n}</b><small>kindles</small></div>
+          <div><b>${n}</b><small>kindles</small><i class="spark-line">${[2, 3, 2, 4, 3, 5, n].map((v, i, a) => `<span style="height:${v * 12}%"></span>`).join("")}</i></div>
           <div><b>${Object.keys(warm).length}</b><small>warm spots</small></div>
-          <div><b>${avg >= 0 ? "+" : ""}${avg.toFixed(1)}</b><small>avg liking gap</small></div>
+          <div class="kpi-hot"><b>${avg >= 0 ? "+" : ""}${avg.toFixed(1)}</b><small>avg liking gap</small></div>
         </div>
         <div class="panel">
-          <h3>Forecast vs. reality</h3>
+          <h3>Forecast vs. reality <span class="mono">last 5</span></h3>
           <ul class="dumbbells">
             ${S.embers.slice(-5).map((e) => `<li><span>${e.name}</span><span class="db"><i class="db-line" style="left:${(e.g - 1) * 25}%;width:${(e.r - e.g) * 25}%"></i><i class="db-g" style="left:${(e.g - 1) * 25}%"></i><i class="db-r" style="left:${(e.r - 1) * 25}%"></i></span></li>`).join("")}
           </ul>
           <p class="legend"><i class="db-g"></i> your guess <i class="db-r"></i> how it went</p>
         </div>
         <div class="panel">
-          <h3>Warm spots</h3>
-          <div class="warm">${Object.entries(warm).sort((a, b) => b[1] - a[1]).map(([k, v]) => `<span class="warm-chip" style="--w:${v}">${SPOTS[k].name} <b>×${v}</b></span>`).join("")}</div>
+          <h3>Warm spots <span class="mono">this term</span></h3>
+          <ul class="warm-bars">${Object.entries(warm).sort((a, b) => b[1] - a[1]).map(([k, v]) => `<li><span>${SPOTS[k].name}</span><i style="--w:${(v / maxW) * 100}%"></i><b>${v}</b></li>`).join("")}</ul>
         </div>
       </section>`; } },
 
     "light-where": { tab: false, label: "Light: where", render: () => `
       <section class="scr scr-flow">
-        <header class="flow-head"><button class="back" data-action="go" data-to="map" aria-label="Back">${icon("back")}</button><span class="steps"><i class="on"></i><i></i><i></i></span></header>
+        <header class="flow-head"><button class="back" data-action="go" data-to="map" aria-label="Back">${icon("back")}</button><span class="steps"><i class="on"></i><i></i><i></i></span><span class="mono step-of">1 of 3</span></header>
         <h2 class="big">Where are you?</h2>
         <p class="sub">Lights snap to public spots only. Never your exact location.</p>
-        <ul class="radio-list" role="radiogroup">
-          ${Object.entries(SPOTS).map(([k, s]) => `<li><button class="radio${S.my.spot === k ? " on" : ""}" role="radio" aria-checked="${S.my.spot === k}" data-action="spot" data-k="${k}"><b>${s.name}</b><small>${s.sub}${k === "machall" ? " · <em>you’re here</em>" : ""}</small></button></li>`).join("")}
+        <ul class="spot-list" role="radiogroup">
+          ${Object.entries(SPOTS).map(([k, s]) => { const here = LIGHTS.filter((l) => l.spot === k).length; const busy = { machall: 4, tfdl: 3, ict: 2, kin: 2, sci: 3, eng: 1, train: 2 }[k]; return `<li><button class="spot${S.my.spot === k ? " on" : ""}" role="radio" aria-checked="${S.my.spot === k}" data-action="spot" data-k="${k}">
+            <span class="spot-ic">${icon(k === "train" ? "walk" : k === "machall" ? "food" : k === "tfdl" ? "study" : "pin")}</span>
+            <span class="spot-txt"><b>${s.name}</b><small>${s.sub}${k === "machall" ? " · <em>you’re here</em>" : ""}</small></span>
+            <span class="spot-meta"><span class="busy" title="How busy">${[1, 2, 3, 4].map((i) => `<i class="${i <= busy ? "on" : ""}"></i>`).join("")}</span><small>${here ? `${here} light${here > 1 ? "s" : ""} on` : "quiet"}</small></span>
+          </button></li>`; }).join("")}
         </ul>
         <button class="btn-primary sticky" data-action="go" data-to="light-what">Next</button>
       </section>` },
@@ -391,22 +475,24 @@
   const AFTER = {
     welcome(el) {
       if (reduce) return;
+      gsap.from($(".wl-art img", el), { scale: 1.12, duration: 2.4, ease: "expo.out" });
       gsap.from($(".wl-wick img", el), { y: 60, opacity: 0, duration: 1.2, ease: "expo.out" });
       gsap.from($(".wl-glow", el), { scale: 0, opacity: 0, duration: 1.6, delay: 0.4, ease: "expo.out" });
       gsap.to($(".wl-wick img", el), { rotate: 2, duration: 2.4, repeat: -1, yoyo: true, ease: "sine.inOut", transformOrigin: "50% 100%" });
-      gsap.from($$(".wl-title, .wl-tag, .wl-copy, .btn-primary, .wl-fine", el), { y: 20, opacity: 0, stagger: 0.08, delay: 0.35, duration: 0.8, ease: "expo.out" });
+      gsap.from($$(".wl-pill, .wl-title, .wl-tag, .wl-copy, .wl-dots, .btn-primary, .wl-fine", el), { y: 20, opacity: 0, stagger: 0.08, delay: 0.35, duration: 0.8, ease: "expo.out", clearProps: "transform" });
     },
     map(el) {
       if (reduce) return;
       gsap.from($$(".pin", el), { scale: 0, transformOrigin: "50% 50%", stagger: 0.07, duration: 0.6, ease: "back.out(2.5)", delay: 0.15 });
       gsap.from($$(".lcard", el), { x: 40, opacity: 0, stagger: 0.06, duration: 0.6, ease: "expo.out", delay: 0.2 });
+      gsap.from($$(".map-chrome > *", el), { opacity: 0, y: -6, stagger: 0.05, duration: 0.5, delay: 0.3 });
     },
     detail(el) { if (!reduce) gsap.from($(".sheet", el), { yPercent: 100, duration: 0.6, ease: "expo.out" }); },
     forecast(el) { if (!reduce) gsap.from($$(".face", el), { y: 18, opacity: 0, stagger: 0.05, duration: 0.6, ease: "back.out(2)" }); },
     onway(el) {
       if (reduce) return;
-      const p = $(".route-path", el), len = p.getTotalLength();
-      gsap.fromTo(p, { strokeDashoffset: len, strokeDasharray: `${len} ${len}` }, { strokeDashoffset: 0, duration: 1.6, ease: "power2.inOut" });
+      const p = $(".m-route", el), len = p.getTotalLength();
+      gsap.fromTo(p, { strokeDashoffset: len, strokeDasharray: `${len} ${len}` }, { strokeDashoffset: 0, duration: 1.8, ease: "power2.inOut", onComplete: () => { p.style.strokeDasharray = "4 7"; p.classList.add("flow"); } });
       gsap.from($(".spark", el), { rotateX: -60, y: 30, opacity: 0, duration: 0.9, delay: 0.3, ease: "expo.out" });
     },
     kindle(el) {
