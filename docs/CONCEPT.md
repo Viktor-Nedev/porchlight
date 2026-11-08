@@ -22,17 +22,14 @@ This is the **in-between hour**: gaps between classes that commuter-heavy campus
 |---|---|
 | **The liking gap.** After talking to a stranger, people consistently underestimate how much the other person liked them. | Boothby, Cooney, Sandstrom & Clark (2018), *Psychological Science*, "The Liking Gap in Conversations: Do People Like Us More Than We Think?" |
 | **Mistakenly seeking solitude.** Commuters predicted that talking to a stranger would be unpleasant; those asked to do it reported a *more* positive trip than those who sat alone. | Epley & Schroeder (2014), *Journal of Experimental Psychology: General* |
-| **No signal.** In a public space there is no socially safe way to say "I'm open to company". Headphones and phones send the opposite signal, even when we don't mean it. | Design insight, *to be validated in our interviews and survey* (see `RESEARCH_KIT.md`) |
-| **It's widespread.** 55–67 % of U.S. undergraduates reported feeling "very lonely" at some point in the previous 12 months across survey waves from 2008 to 2019. | American College Health Association, National College Health Assessment II (U.S. undergraduates) |
+| **Weak ties matter.** Students felt happier and more belonging on days with more interactions with acquaintances. | Sandstrom & Dunn (2014), *Personality and Social Psychology Bulletin* |
+| **No signal.** In a public space there is no socially safe way to say "I'm open to company". Headphones and phones send the opposite signal. | Competitive analysis: no existing option is in-the-moment, in-person and commitment-free (`RESEARCH.md` §3) |
+| **It's widespread.** 69.6 % of Canadian post-secondary students felt "very lonely" in the past 12 months (31.2 % in the last two weeks); 65 % at the University of Calgary; 23 % of Canadians aged 15–24 are always or often lonely. | ACHA-NCHA II Canadian Reference Group 2019 (n = 55,284); UCalgary survey cited in Stamp (2020); Statistics Canada (2021) |
 
 **Root cause:** students don't lack the *desire* to connect; they lack a **signal**. Everyone is waiting for someone else to go first, and everyone underestimates how welcome they'd be. This is pluralistic ignorance plus the liking gap.
 
-### Our own research
-*Fill this in after running the kit in `RESEARCH_KIT.md`, and add the same numbers to `js/data.js` so they appear on the site.*
-
-- Survey: n = __ students
-- Interviews: __ students (programs: __)
-- Observation: __ minutes at __ (count of people sitting alone vs in groups)
+### Research methods
+Desk research, literature review, competitive analysis and a cognitive walkthrough of the prototype. Full results, sources and the iteration log: [`RESEARCH.md`](RESEARCH.md). An optional student survey kit is in [`RESEARCH_KIT.md`](RESEARCH_KIT.md).
 
 ## 3. Who we designed for
 
@@ -117,5 +114,8 @@ This is the **in-between hour**: gaps between classes that commuter-heavy campus
 
 - Boothby, E. J., Cooney, G., Sandstrom, G. M., & Clark, M. S. (2018). The liking gap in conversations: Do people like us more than we think? *Psychological Science, 29*(11), 1742–1756.
 - Epley, N., & Schroeder, J. (2014). Mistakenly seeking solitude. *Journal of Experimental Psychology: General, 143*(5), 1980–1999.
-- American College Health Association. *National College Health Assessment II*, reference group reports, 2008–2019.
+- American College Health Association (2019). *ACHA-NCHA II Spring 2019 Canadian Reference Group Executive Summary.*
+- Stamp, J. (2020). *Campus Mental Health: How Stigma Affects Students’ Approach to Resources.* MSc thesis, University of Calgary.
+- Statistics Canada (2021). *Canadian Social Survey: Loneliness in Canada.* The Daily, Nov 24.
+- Sandstrom, G. M., & Dunn, E. W. (2014). Social interactions and well-being: The surprising power of weak ties. *Personality and Social Psychology Bulletin, 40*, 910–922.
 - Russell, D. W. (1996). UCLA Loneliness Scale (Version 3). *Journal of Personality Assessment, 66*(1), 20–40. (3-item short form: Hughes et al., 2004, *Research on Aging*.)

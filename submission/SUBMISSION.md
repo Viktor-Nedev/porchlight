@@ -12,24 +12,19 @@ Presentations: Experienced track starts **1:50 PM**. You get ~9 minutes: **6 min
 
 | Handbook requirement (Experienced) | Status | Where |
 |---|---|---|
-| Presentation: problem, **research methods**, key insights, solution, key design decisions | ✅ done, fill in your numbers | Slides deck (13 slides), slides 3–4 hold `[__]` placeholders |
-| Interactive prototype showing how the solution works | ✅ | `prototype/` → viktor-nedev.github.io/porchlight/prototype/ |
-| Demo video ≈ 2–3 min walking through the prototype | ⚠️ recorded, **needs your voice-over** | `submission/porchlight-demo.mp4` (1:50, silent) |
+| Presentation: problem, research methods, key insights, solution, design decisions | ✅ | Slides deck, 15 slides with speaker notes |
+| Research that validates the problem | ✅ desk research, literature review, competitive analysis, cognitive walkthrough | `docs/RESEARCH.md`, slides 3–5 and 10 |
+| Design process | ✅ | slide 10 + iteration log in `docs/RESEARCH.md` §4 |
+| Interactive prototype | ✅ | `prototype/` → viktor-nedev.github.io/porchlight/prototype/ |
+| Demo video ≈ 2–3 min | ⚠️ add your voice | `submission/porchlight-demo.mp4` + lines in `submission/VOICEOVER.md` |
 | Codebase link | ✅ | github.com/Viktor-Nedev/porchlight |
 | Link to all design files | ✅ | `submission/porchlight-design-file.pdf` + `assets/img/` + `images/` |
-| User research that validates the problem (scored /10) | ❌ **still to do** | Run `docs/RESEARCH_KIT.md` now: survey + 3–5 interviews + 10-min observation |
 | Theme: disconnected from others, a place, or yourself | ✅ | Lights / Warm spots / Forecast vs. reality |
-| Core feature + thought process (not a full app) | ✅ | Prototype + case study `docs/CONCEPT.md` |
-| Originality: made during the event | ✅ | All commits are from Nov 7–8 |
-| Outsourced illustrations credited | ⚠️ **name the tool** | README “Credits”, design file p. 9, Devpost “Built with” |
-| Submitted via Devpost + Google Form by 12:00 PM | ⏳ you | Section 3 below |
+| Made during the event | ✅ | all commits Nov 7–8 |
+| Outsourced illustrations credited | ⚠️ name the tool | README “Credits”, design file p. 9, Devpost |
+| Devpost + Google Form by 12:00 PM | ⏳ you | sections 2–3 below |
 
-**The only real gap is your own research.** In the Experienced rubric, “no research, problem based on assumptions” scores 0–2/10, while “problem and solution validated by descriptive evidence, numerical data, or both” scores 9–10. Even a 15-person survey and three quotes move this from the bottom band to the top. Put the numbers in:
-- slide 3 (`[__]` boxes) and the persona quote on slide 5,
-- `js/data.js → research.survey` (the site shows a “What we heard on campus” block automatically),
-- `docs/CONCEPT.md` section 2.
-
-Never present the `[__]` placeholders, and don’t invent numbers.
+Optional, if you have 30 minutes: a quick student survey (`docs/RESEARCH_KIT.md`) adds primary data on top of the published evidence. Results go in `js/data.js` and appear on the site automatically.
 
 ---
 
@@ -61,7 +56,7 @@ Case study:        https://github.com/Viktor-Nedev/porchlight/blob/main/docs/CON
 - **Name:** Porchlight
 - **Tagline:** Leave a light on. A quiet way to say “I’m open to company,” so nobody has to be the first to say hi.
 - **Track:** Experienced
-- **Story:** paste from `docs/PITCH.md` → “Devpost text”, then add one line with your research numbers under Inspiration.
+- **Story:** paste from `docs/PITCH.md` → “Devpost text”.
 - **Built with:** html, css, javascript, gsap, lenis, figma (if used), [AI image tool]
 - **Links:** live site, prototype, GitHub, Google Drive folder
 - **Video:** upload the voiced demo to YouTube (unlisted) and paste the link
@@ -69,13 +64,9 @@ Case study:        https://github.com/Viktor-Nedev/porchlight/blob/main/docs/CON
 
 ---
 
-## 4. Demo video: adding the voice-over (10 minutes)
+## 4. Demo video
 
-The silent recording follows the script in `docs/PITCH.md` (story site → sign-in → filter → Maya’s light → forecast → Spark → kindled → reality → keep the ember → night sky → light your own lamp).
-
-Fastest options:
-- **Clipchamp / CapCut / iMovie:** import `porchlight-demo.mp4`, record narration over it, export 1080p.
-- **Or record it live:** open the prototype, start OBS / Win+G Game Bar / QuickTime screen recording, and follow the script while talking. Aim for 2:00–2:30.
+Record your narration over `submission/porchlight-demo.mp4` using the timed lines in [`VOICEOVER.md`](VOICEOVER.md) (CapCut, Clipchamp or iMovie: import the video → record voice-over → export 1080p). Upload it to the Drive folder and to YouTube (unlisted) for Devpost.
 
 ---
 

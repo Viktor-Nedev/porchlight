@@ -271,8 +271,8 @@
     })();
   }
   function countUp(el) {
-    const to = +el.dataset.countTo, suffix = el.dataset.suffix || "", o = { v: +el.dataset.countFrom || 0 };
-    gsap.to(o, { v: to, duration: 1.6, ease: "expo.out", onUpdate: () => (el.textContent = Math.round(o.v) + suffix) });
+    const final = el.textContent, to = +el.dataset.countTo, suffix = el.dataset.suffix || "", o = { v: +el.dataset.countFrom || 0 };
+    gsap.to(o, { v: to, duration: 1.6, ease: "expo.out", onUpdate: () => (el.textContent = Math.round(o.v) + suffix), onComplete: () => (el.textContent = final) });
   }
   if (!reduce) {
     qa("[data-board]").forEach((b, i) => {
