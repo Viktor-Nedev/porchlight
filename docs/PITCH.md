@@ -26,7 +26,7 @@ The deck is the Slides artifact “Porchlight — Leave a light on” (14 slides
 
 ## Optional extra: prototype walkthrough video
 
-Not required for the Beginner track. A silent 1:50 recording is in `submission/porchlight-demo.mp4`, with timed narration in [`submission/VOICEOVER.md`](../submission/VOICEOVER.md), if you want to add it to the Drive folder.
+Not required for the Beginner track. A silent 4:20 walkthrough of the story site and prototype is in `submission/porchlight-demo.mp4`, with timed narration in [`submission/VOICEOVER.md`](../submission/VOICEOVER.md), if you want to add it to the Drive folder.
 
 ## Devpost text (draft)
 
