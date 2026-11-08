@@ -45,7 +45,9 @@
   const lamps = [300, 800, 1300].map((x, i) => `
     <g class="r-lamp" style="animation-delay:${i * 0.6}s">
       <path d="M${x},0 V${120 + i * 10}" class="r-cord"/>
-      <path d="M${x - 220},${150 + i * 10} L${x - 34},${150 + i * 10} L${x + 34},${150 + i * 10} L${x + 220},${150 + i * 10} L${x + 380},900 L${x - 380},900 Z" fill="url(#rCone)" class="r-cone"/>
+      <path d="M${x},${148 + i * 10} L${x - 250},900 L${x + 250},900 Z" fill="url(#rCone)" class="r-cone"/>
+      <path d="M${x},${148 + i * 10} L${x - 120},900 L${x + 120},900 Z" fill="url(#rConeCore)" class="r-cone"/>
+      <ellipse cx="${x}" cy="${640 + i * 4}" rx="190" ry="26" fill="url(#rPool)" class="r-pool"/>
       <path d="M${x - 34},${150 + i * 10} Q${x},${96 + i * 10} ${x + 34},${150 + i * 10} Z" class="r-shade"/>
       <ellipse cx="${x}" cy="${151 + i * 10}" rx="16" ry="5" class="r-bulb"/>
     </g>`).join("");
@@ -130,7 +132,9 @@
       <linearGradient id="rWall" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2b2256"/><stop offset=".62" stop-color="#2f2560"/><stop offset="1" stop-color="#261e50"/></linearGradient>
       <linearGradient id="rSky" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#0d0b2a"/><stop offset=".55" stop-color="#2a2366"/><stop offset="1" stop-color="#5b4a8f"/></linearGradient>
       <linearGradient id="rFloor" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#211a48"/><stop offset="1" stop-color="#140f30"/></linearGradient>
-      <radialGradient id="rCone" cx=".5" cy="0" r="1"><stop offset="0" stop-color="#ffd27a" stop-opacity=".16"/><stop offset=".6" stop-color="#ffd27a" stop-opacity=".04"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient>
+      <linearGradient id="rCone" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffd27a" stop-opacity=".22"/><stop offset=".45" stop-color="#ffd27a" stop-opacity=".07"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></linearGradient>
+      <linearGradient id="rConeCore" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff0c4" stop-opacity=".2"/><stop offset=".35" stop-color="#ffd27a" stop-opacity=".05"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></linearGradient>
+      <radialGradient id="rPool"><stop offset="0" stop-color="#ffd27a" stop-opacity=".16"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient>
       <radialGradient id="rVignette" cx=".5" cy=".55" r=".75"><stop offset=".55" stop-color="#120f2c" stop-opacity="0"/><stop offset="1" stop-color="#0d0b21" stop-opacity=".75"/></radialGradient>
       <pattern id="rTile" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="none"/><path d="M0,0 H40 M0,0 V40" stroke="#3a3070" stroke-width="1" opacity=".35"/></pattern>
     </defs>

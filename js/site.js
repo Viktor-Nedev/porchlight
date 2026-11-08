@@ -64,6 +64,8 @@
       .from(".i-dot", { scale: 0, duration: 0.6, ease: "back.out(3)" }, 0.6)
       .from(".eyebrow", { y: 16, opacity: 0, duration: 0.8, ease: "expo.out" }, 0.2)
       .from([".hero-tag", ".hero-card"], { y: 22, opacity: 0, stagger: 0.12, duration: 1, ease: "expo.out" }, 0.62)
+      .from(".hc-bubble", { scale: 0.6, rotate: -6, opacity: 0, duration: 0.9, ease: "back.out(2.4)" }, 1.0)
+      .from(".hc-hand", { opacity: 0, x: -12, duration: 0.8, ease: "expo.out" }, 1.15)
       .from(".layer", { yPercent: 3, stagger: 0.05, duration: 1.8, ease: "expo.out" }, 0)
       .from(".hero-wick", { y: 40, opacity: 0, duration: 1.2, ease: "expo.out" }, 0.5)
       .from([".scroll-cue", ".hero-clock", ".nav"], { opacity: 0, duration: 0.8 }, 1);
