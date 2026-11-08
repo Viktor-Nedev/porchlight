@@ -59,6 +59,7 @@ docs/RESEARCH_KIT.md  Survey, interview script and observation plan
 docs/PITCH.md         6-minute slide plan, 2-minute demo script, Devpost text
 docs/IMAGE_PROMPTS.md Art direction and prompts for every custom illustration
 docs/IMAGE_PROMPTS_V2.md Optional second round: portraits, onboarding, states
+submission/           Submission pack: checklist, design-file PDF, demo video
 assets/img/           Optimised illustrations used by the site (cut out, retouched, WebP)
 images/               Original illustration files as generated
 ```

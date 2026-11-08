@@ -3,20 +3,25 @@
 **Experienced track:** 6-minute presentation including a ~2-minute demo video, then 3 minutes of Q&A.
 **Deadline:** Devpost + Google Form, **Sunday Nov 8, 12:00 PM**.
 
-## Slide plan (6:00 total)
+## Slide plan (6:00 total = 4:00 talking + 2:00 video, then 3:00 Q&A)
+
+The deck is the Slides artifact “Porchlight — Leave a light on” (13 slides, speaker notes on every slide).
 
 | # | Time | Slide | What to say |
 |---|---|---|---|
-| 1 | 0:00 | **Title**: "porchlight · Leave a light on." (`og-cover` art) | "Raise your hand if you've ever spent two hours on campus between classes, alone, in a room full of people." |
-| 2 | 0:20 | **The moment**: the in-between hour (`slide-problem` art + observation counts) | Describe 4:10 pm at MacHall. One real quote from an interview. |
-| 3 | 0:50 | **Research**: survey numbers + the liking gap + mistakenly seeking solitude | "It's not that students don't want to connect. It's that nobody can tell who does." |
-| 4 | 1:30 | **Insight → opportunity** | "There's no safe signal for 'I'm open to company'. So we designed one." |
-| 5 | 1:45 | **Demo video** (2:00) | See the script below. |
-| 6 | 3:45 | **One light, three disconnections**: Lights / Warm spots / Forecast vs. reality | Tie each feature back to the theme's three disconnections. |
-| 7 | 4:20 | **Safety & key decisions** | Lights expire, public spots only, first name only, "I have to run". |
-| 8 | 4:50 | **Feasibility**: PWA + real-time DB + Lantern Table tokens (`lantern-table-token` art) | Cost ~$0–25/month, Students' Union partnership, cold-start plan. |
-| 9 | 5:20 | **Impact & roadmap**: the C-Train line | How we'd measure it: UCLA loneliness score, kindles, liking-gap trend. |
-| 10 | 5:45 | **Close**: "Someone in this room is hoping you'll say hi." | Point to the live site and repo. |
+| 1 | 0:00 | Cover | “Raise your hand if you’ve ever spent two hours on campus between classes, alone, in a room full of people.” |
+| 2 | 0:15 | The moment | 4:10 pm at MacHall. One real quote from an interview. |
+| 3 | 0:40 | Research methods & evidence | Survey n, interviews, observation, then the liking gap and solitude studies. |
+| 4 | 1:10 | Key insights | No signal → light; liking gap → forecast; first 30 seconds → Spark + exit. |
+| 5 | 1:30 | Persona: Sam | The four needs: low effort, low risk, no commitment, now. |
+| 6 | 1:45 | The idea | “Leave a light on.” Pause. |
+| 7 | 2:00 | How it works | Five screens in 15 seconds; the video shows it live. |
+| 8 | 2:15 | **Demo video (2:00)** | Play `submission/porchlight-demo.mp4` with your voice-over. |
+| 9 | 4:15 | One light, three ways back | Others / a place / yourself, straight from the brief. |
+| 10 | 4:40 | Key design decisions | Expiring lights and the private forecast. |
+| 11 | 5:05 | Feasibility | PWA + free-tier backend + Lantern Table tokens, cold-start plan. |
+| 12 | 5:30 | Impact & roadmap | Pilot dates, loneliness score as the main metric. |
+| 13 | 5:50 | Close | “Someone in this room is hoping you’ll say hi.” |
 
 ## Demo video script (≈ 2:00)
 

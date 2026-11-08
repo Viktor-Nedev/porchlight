@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Porchlight — Design file</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Martian+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  @page { size: 1600px 900px; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Schibsted Grotesk", sans-serif; color: #f6f1e7; background: #120f2c; }
+  .page { width: 1600px; height: 900px; padding: 72px 88px; position: relative; overflow: hidden; page-break-after: always; display: flex; flex-direction: column; gap: 28px; }
+  .light { background: #f4ecdf; color: #241a3f; }
+  .mono { font-family: "Martian Mono", monospace; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: #ffd27a; }
+  .light .mono { color: #a8541c; }
+  h1 { font-family: "Fraunces", serif; font-weight: 800; font-size: 150px; letter-spacing: -6px; line-height: .9; margin: 0; }
+  h2 { font-family: "Fraunces", serif; font-weight: 600; font-size: 56px; letter-spacing: -1.5px; line-height: 1.02; margin: 0; }
+  h3 { font-family: "Fraunces", serif; font-weight: 600; font-size: 26px; margin: 0 0 6px; }
+  p { margin: 0; font-size: 17px; line-height: 1.5; color: #d9d2ea; }
+  .light p { color: #4a4060; }
+  .hand { font-family: "Caveat", cursive; font-weight: 700; color: #ffd27a; }
+  .foot { position: absolute; left: 88px; right: 88px; bottom: 32px; display: flex; justify-content: space-between; font-family: "Martian Mono", monospace; font-size: 12px; color: #8f88bd; }
+  .light .foot { color: #8a7b6c; }
+  .grid { display: grid; gap: 22px; }
+  .sw { border-radius: 18px; height: 150px; padding: 16px; display: flex; flex-direction: column; justify-content: flex-end; font-size: 14px; font-family: "Martian Mono", monospace; }
+  .card { background: #1d1842; border: 1px solid #3a3366; border-radius: 18px; padding: 22px; }
+  .light .card { background: #fbf6ec; border-color: #e2d4bd; }
+  img { display: block; }
+  .shot { height: 560px; width: auto; filter: drop-shadow(0 20px 30px rgba(0,0,0,.45)); }
+  .cap { font-size: 14px; color: #a39cc6; text-align: center; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<section class="page" style="justify-content:flex-end;background:#120f2c url(../../assets/img/idea-campus.webp) center/cover">
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,8,30,.94),rgba(10,8,30,.7) 45%,rgba(10,8,30,.05))"></div>
+  <div style="position:relative;display:flex;flex-direction:column;gap:18px">
+    <span class="mono">Design file · UXDC Designathon 2.0 · Human Connection</span>
+    <h1>porchlight</h1>
+    <span class="hand" style="font-size:56px">Leave a light on.</span>
+    <p style="max-width:640px;font-size:20px;color:#e8e2f4">Visual language, components, every prototype screen and the illustration set. Live prototype: viktor-nedev.github.io/porchlight/prototype · Code: github.com/Viktor-Nedev/porchlight</p>
+  </div>
+</section>
+
+<section class="page light">
+  <span class="mono">01 · Concept &amp; metaphor</span>
+  <h2>Light = openness. The whole brand is <i style="color:#a8541c">warm windows in the dark</i>.</h2>
+  <div style="display:flex;gap:40px;align-items:flex-end;flex:1">
+    <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+      <p style="font-size:20px">Wick, a shy paper lantern, is the mascot and the emotional arc of the product: dim when alone, glowing when someone says hi. The story site moves from dusk to night over Calgary, so the city literally lights up as the story unfolds.</p>
+      <p style="font-size:20px">Every visual choice supports one feeling: <b>calm, hopeful, never pushy</b>. No gamified badges, no follower counts, no bright notification reds.</p>
+    </div>
+    <div style="display:flex;gap:18px;align-items:flex-end">
+      <div style="text-align:center"><img src="../../assets/img/wick-1.webp" style="height:220px"><div class="cap" style="color:#8a7b6c">alone</div></div>
+      <div style="text-align:center"><img src="../../assets/img/wick-2.webp" style="height:230px"><div class="cap" style="color:#8a7b6c">hesitant</div></div>
+      <div style="text-align:center"><img src="../../assets/img/wick-3.webp" style="height:270px"><div class="cap" style="color:#8a7b6c">open</div></div>
+      <div style="text-align:center"><img src="../../assets/img/wick-4.webp" style="height:270px"><div class="cap" style="color:#8a7b6c">kindled</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>porchlight · design file</span><span>02</span></div>
+</section>
+
+<section class="page">
+  <span class="mono">02 · Colour</span>
+  <h2>Night, dusk, and one warm accent.</h2>
+  <div class="grid" style="grid-template-columns:repeat(6,1fr)">
+    <div class="sw" style="background:#0d0b21;border:1px solid #2a2556">Night 900<br>#0D0B21</div>
+    <div class="sw" style="background:#1e1a40">Night 700<br>#1E1A40</div>
+    <div class="sw" style="background:#3a2c6b">Dusk 600<br>#3A2C6B</div>
+    <div class="sw" style="background:#ffb547;color:#1b1236">Lantern amber<br>#FFB547</div>
+    <div class="sw" style="background:#ffd27a;color:#1b1236">Amber 300<br>#FFD27A</div>
+    <div class="sw" style="background:#f4ecdf;color:#241a3f">Paper<br>#F4ECDF</div>
+    <div class="sw" style="background:#f29e7d;color:#1b1236">Chinook peach<br>#F29E7D</div>
+    <div class="sw" style="background:#e8607a;color:#1b1236">Rose (people)<br>#E8607A</div>
+    <div class="sw" style="background:#5cc2b6;color:#1b1236">Teal (time)<br>#5CC2B6</div>
+    <div class="sw" style="background:#8b7cff;color:#1b1236">Violet (people)<br>#8B7CFF</div>
+    <div class="sw" style="background:#e8384f">C-Train red<br>#E8384F</div>
+    <div class="sw" style="background:#f6f1e7;color:#241a3f">Ink<br>#F6F1E7</div>
+  </div>
+  <p style="max-width:1100px">Amber is reserved for light: lit windows, the lamp button, the user’s own light, primary actions. Person colours identify individuals on the map; time and transit use teal and C-Train red. Body text on night backgrounds is #D9D2EA (≥ 7:1).</p>
+  <div class="foot"><span>porchlight · design file</span><span>03</span></div>
+</section>
+
+<section class="page light">
+  <span class="mono">03 · Typography</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px 60px;flex:1">
+    <div class="card"><div class="mono" style="margin-bottom:10px">Display · Fraunces (soft, wonky)</div><div style="font-family:Fraunces;font-weight:800;font-size:96px;letter-spacing:-3px;line-height:1.1;padding-bottom:12px">porchlight</div><p>Headlines and numbers. Italic in amber for the one emotional word in a line.</p></div>
+    <div class="card"><div class="mono" style="margin-bottom:10px">Text · Schibsted Grotesk</div><div style="font-size:34px;font-weight:600;line-height:1.2">A quiet way to say “I’m open to company.”</div><p style="margin-top:10px">Body, UI labels and buttons. A newspaper grotesk: warm, readable, uncommon.</p></div>
+    <div class="card"><div class="mono" style="margin-bottom:10px">Accent · Caveat</div><div class="hand" style="font-size:64px;color:#a8541c">Leave a light on.</div><p>Handwritten notes and the tagline only, never body text.</p></div>
+    <div class="card"><div class="mono" style="margin-bottom:10px">Labels · Martian Mono · DotGothic16</div><div style="font-family:'Martian Mono';font-size:26px;letter-spacing:.1em">01 / 06 · LIVE · 5 ON</div><p>Section numbers, metadata and the C-Train arrival boards (DotGothic16).</p></div>
+  </div>
+  <div class="foot"><span>porchlight · design file</span><span>04</span></div>
+</section>
+
+<section class="page">
+  <span class="mono">04 · Key flow · join someone’s light</span>
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;flex:1">
+    <div><img class="shot" src="app-map.webp"><div class="cap">1 · Map of lights</div></div>
+    <div><img class="shot" src="app-detail.webp"><div class="cap">2 · A light: seats, topic, time</div></div>
+    <div><img class="shot" src="app-forecast.webp"><div class="cap">3 · Private forecast</div></div>
+    <div><img class="shot" src="app-onway.webp"><div class="cap">4 · Route + shared Spark</div></div>
+    <div><img class="shot" src="app-kindle.webp"><div class="cap">5 · Kindled, how did it go?</div></div>
+  </div>
+  <div class="foot"><span>porchlight · design file</span><span>05</span></div>
+</section>
+
+<section class="page">
+  <span class="mono">05 · Reflection, memory and the reverse flow</span>
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;flex:1">
+    <div><img class="shot" src="app-result.webp"><div class="cap">6 · Forecast vs. reality</div></div>
+    <div><img class="shot" src="app-sky.webp"><div class="cap">7 · Night sky + warm spots</div></div>
+    <div><img class="shot" src="app-welcome.webp"><div class="cap">0 · Welcome</div></div>
+    <div><img class="shot" src="app-light-where.webp"><div class="cap">A · Light: where</div></div>
+    <div><img class="shot" src="app-lit.webp"><div class="cap">B · Your light is on</div></div>
+  </div>
+  <div class="foot"><span>porchlight · design file</span><span>06</span></div>
+</section>
+
+<section class="page light">
+  <span class="mono">06 · Components &amp; interaction rules</span>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+    <div class="card"><h3>Lantern rating scale</h3><p>Five lanterns from Awkward to Great; glow and expression grow with the score. Used twice (forecast and reality) so the comparison is visual, not numeric.</p></div>
+    <div class="card"><h3>Person pin</h3><p>Teardrop in the person’s colour, initial on a paper face, a small vibe badge (food, study, coffee, company, walk). Selected pins scale up 18%.</p></div>
+    <div class="card"><h3>Time ring</h3><p>A thin amber ring around each avatar shows time left on that light, so urgency is visible without a countdown.</p></div>
+    <div class="card"><h3>Seat indicator</h3><p>Filled squares for taken seats, outlined for free ones; the detail sheet shows the same as a small table diagram.</p></div>
+    <div class="card"><h3>Spark card</h3><p>Flips on tap (0.8 s ease-out); “Another Spark” swaps the text in place. Both people always get the same card.</p></div>
+    <div class="card"><h3>Lamp button</h3><p>The centre of the tab bar; breathes slowly so the primary action is always discoverable.</p></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+    <div class="card"><h3>Motion</h3><p>Ease-out (0.22, 1, 0.36, 1), 0.45 s screen transitions; everything respects prefers-reduced-motion.</p></div>
+    <div class="card"><h3>Accessibility</h3><p>Text ≥ 4.5:1 contrast, labelled icons, keyboard-operable pins and forms, colour never carries meaning alone.</p></div>
+    <div class="card"><h3>Safety</h3><p>Shield always in the header; “I have to run” on every in-progress screen; lights snap to public spots only.</p></div>
+  </div>
+  <div class="foot"><span>porchlight · design file</span><span>07</span></div>
+</section>
+
+<section class="page">
+  <span class="mono">07 · Story site</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1">
+    <div><img src="../../docs/screens/hero.jpg" style="width:100%;border-radius:14px"><div class="cap">Hero at dusk: five painted parallax layers</div></div>
+    <div><img src="../../docs/screens/night.jpg" style="width:100%;border-radius:14px"><div class="cap">Scroll to night: windows light up, Wick finds a friend</div></div>
+    <div><img src="../../docs/screens/moment.jpg" style="width:100%;border-radius:14px;height:310px;object-fit:cover"><div class="cap">The in-between hour</div></div>
+    <div style="display:flex;flex-direction:column;gap:12px;justify-content:center">
+      <p style="font-size:19px">Interactions: pull-chain preloader, dusk-to-night colour grade, pinned storytelling, C-Train arrival boards with split-flap text, a window that opens onto the campus, a sticky phone that drives the live prototype, taped postcards with 3D tilt, a clickable constellation, a horizontal transit-line roadmap and rising lanterns.</p>
+      <p style="font-size:19px">Built with HTML, CSS and JavaScript (GSAP, Lenis). No build step.</p>
+    </div>
+  </div>
+  <div class="foot"><span>porchlight · design file</span><span>08</span></div>
+</section>
+
+<section class="page light">
+  <span class="mono">08 · Illustration set &amp; attribution</span>
+  <div style="display:flex;gap:22px;align-items:flex-end">
+    <img src="../../assets/img/card-1-each-other.webp" style="width:330px;border-radius:8px">
+    <img src="../../assets/img/card-2-place.webp" style="width:330px;border-radius:8px">
+    <img src="../../assets/img/card-3-self.webp" style="width:330px;border-radius:8px">
+    <img src="../../assets/img/lantern-table-token.webp" style="width:330px;border-radius:8px">
+  </div>
+  <div style="display:flex;gap:16px;align-items:flex-end">
+    <img src="../../assets/img/wick-5.webp" style="height:190px"><img src="../../assets/img/wick-6.webp" style="height:150px"><img src="../../assets/img/mascot-wick.webp" style="height:190px">
+    <div style="flex:1;padding-left:24px">
+      <p style="font-size:18px">Style: painterly flat illustration with gouache texture, limited night-and-amber palette. Prompts and art direction in docs/IMAGE_PROMPTS.md.</p>
+      <p style="font-size:18px;margin-top:10px"><b>Attribution:</b> illustrations generated with [AI image tool name] from the team’s prompts, then cut out and retouched by the team. Fonts: Google Fonts (OFL). Motion libraries: GSAP, Lenis.</p>
+    </div>
+  </div>
+  <div class="foot"><span>porchlight · design file</span><span>09</span></div>
+</section>
+
+</body>
+</html>
