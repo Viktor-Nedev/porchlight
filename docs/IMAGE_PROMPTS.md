@@ -1,6 +1,6 @@
 # Image prompts & art direction
 
-The site and prototype already work with vector illustrations drawn in code. Every image below is an **optional upgrade**. Drop a file into `assets/img/` with the exact filename and it replaces the vector fallback automatically. Missing files are simply ignored.
+All images below have been generated and are in use. Originals are in `images/`; the site uses cut-out, compressed copies in `assets/img/`. To regenerate one, reuse its prompt and replace the file in `images/`, then ask for it to be re-processed (checkerboard removal, resizing, WebP).
 
 ---
 

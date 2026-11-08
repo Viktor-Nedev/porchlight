@@ -4,44 +4,40 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Porchlight — Leave a light on</title>
-  <meta name="description" content="Porchlight is a campus app that lets students quietly signal they're open to company during the in-between hours — so nobody has to be the first to say hi." />
-  <meta name="theme-color" content="#15122e" />
+  <meta name="description" content="Porchlight is a campus app that lets students quietly signal they're open to company during the in-between hours, so nobody has to be the first to say hi." />
+  <meta name="theme-color" content="#120f2c" />
   <meta property="og:title" content="Porchlight — Leave a light on" />
-  <meta property="og:description" content="A campus that glows when someone is open to company." />
+  <meta property="og:description" content="A campus that glows when someone is open to company. UXDC Designathon 2.0 · Human Connection." />
   <meta property="og:image" content="https://viktor-nedev.github.io/porchlight/assets/img/og-cover.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DotGothic16&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DotGothic16&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Martian+Mono:wdth,wght@87.5,400;87.5,500;87.5,600&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/img/layer-1-chinook.webp" />
+  <link rel="preload" as="image" href="assets/img/mascot-wick.webp" />
   <link rel="stylesheet" href="css/lenis.css" />
   <link rel="stylesheet" href="css/site.css" />
 </head>
 <body class="is-loading">
   <a class="skip" href="#moment">Skip to content</a>
 
-  <!-- ============ PRELOADER: pull the chain ============ -->
+  <!-- ============ PRELOADER: Wick in the dark ============ -->
   <div class="preloader" id="preloader" aria-live="polite">
-    <div class="pl-lamp" aria-hidden="true">
-      <div class="pl-cord"></div>
-      <svg class="pl-bulb" viewBox="0 0 120 160" width="120" height="160">
-        <defs>
-          <radialGradient id="plGlow" cx="50%" cy="60%" r="50%">
-            <stop offset="0%" stop-color="#fff3c9" />
-            <stop offset="60%" stop-color="#ffc35c" />
-            <stop offset="100%" stop-color="#ff8a3d" />
-          </radialGradient>
-        </defs>
-        <path d="M30 18h60l14 52H16z" fill="#2a2450" stroke="#4b3f86" stroke-width="2" />
-        <path class="pl-bulb-glass" d="M60 70c-22 0-32 16-32 34 0 14 10 24 18 30h28c8-6 18-16 18-30 0-18-10-34-32-34z" fill="url(#plGlow)" />
-        <rect x="46" y="134" width="28" height="12" rx="3" fill="#4b3f86" />
-      </svg>
-      <button class="pl-chain" id="plChain" type="button" aria-label="Pull the chain to turn on the light">
-        <span class="pl-chain-links"></span>
-        <span class="pl-chain-knob"></span>
+    <div class="pl-stage">
+      <span class="pl-halo" aria-hidden="true"></span>
+      <img class="pl-wick" src="assets/img/mascot-wick.webp" alt="Wick, a small paper lantern, waiting in the dark" width="765" height="1024" />
+      <button class="pl-chain" id="plChain" type="button" aria-label="Pull the chain to turn Wick's light on">
+        <span class="pl-chain-cord"></span>
+        <span class="pl-chain-bead"></span>
       </button>
     </div>
-    <p class="pl-hint"><span class="hand">pull the chain</span><small>or press any key</small></p>
+    <div class="pl-copy">
+      <p class="pl-line">Wick has been waiting for someone to say hi.</p>
+      <p class="pl-hint"><span class="hand">pull the chain</span> <span class="mono">or press any key</span></p>
+    </div>
     <div class="pl-flood" aria-hidden="true"></div>
   </div>
 
@@ -51,71 +47,105 @@
   <div class="fuse" aria-hidden="true"><span class="fuse-fill"></span><span class="fuse-spark"></span></div>
 
   <header class="nav">
-    <a class="nav-logo" href="#top" aria-label="Porchlight home">
-      <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><use href="#i-lamp" /></svg>
-      <span>porchlight</span>
+    <a class="nav-logo" href="#top" aria-label="Porchlight, back to top">
+      <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><use href="#i-lamp" /></svg></span>
+      <span class="logo-word">porchl<span class="logo-i">ı</span>ght</span>
     </a>
     <nav class="nav-links" aria-label="Sections">
-      <a href="#moment" data-magnetic>The moment</a>
-      <a href="#why" data-magnetic>Why</a>
-      <a href="#how" data-magnetic>How it works</a>
-      <a href="#roadmap" data-magnetic>Roadmap</a>
+      <a href="#moment" data-magnetic><span class="mono">01</span> The moment</a>
+      <a href="#why" data-magnetic><span class="mono">02</span> Why</a>
+      <a href="#how" data-magnetic><span class="mono">04</span> How it works</a>
+      <a href="#roadmap" data-magnetic><span class="mono">08</span> Roadmap</a>
     </nav>
-    <a class="btn btn-glow nav-cta" href="prototype/" data-magnetic>Try the prototype <span aria-hidden="true">→</span></a>
+    <a class="btn btn-glow nav-cta" href="prototype/" data-magnetic>Try the prototype <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" /></svg></a>
   </header>
 
   <main id="top">
-    <!-- ============ 1. HERO: Calgary at dusk ============ -->
+    <!-- ============ 1. HERO: Calgary from dusk to night ============ -->
     <section class="hero" id="hero" aria-label="Porchlight">
       <div class="hero-sticky">
-        <div class="hero-sky"></div>
-        <div class="hero-sun"></div>
+        <div class="layer l-sky" data-depth="0.05"><img src="assets/img/layer-1-chinook.webp" alt="" width="2048" height="1012" fetchpriority="high" /></div>
+        <div class="layer l-rockies" data-depth="0.12"><img src="assets/img/layer-2-rockies.webp" alt="" width="2048" height="1012" /></div>
+        <div class="layer l-hills" data-depth="0.2"><img src="assets/img/layer-3-foothills.webp" alt="" width="2048" height="1012" /></div>
+        <div class="layer l-city" data-depth="0.3"><img src="assets/img/layer-4-city.webp" alt="" width="2048" height="1012" /></div>
+        <div class="hero-tint" aria-hidden="true"></div>
+        <div class="layer l-city l-lights" data-depth="0.3" aria-hidden="true"><img src="assets/img/city-lights.webp" alt="" width="2048" height="1012" /></div>
+        <div class="layer l-fore" data-depth="0.48"><img src="assets/img/layer-5-foreground.webp" alt="" width="2048" height="1012" /></div>
         <div class="hero-stars" aria-hidden="true"></div>
+        <div class="hero-moon" aria-hidden="true"></div>
 
-        <div class="layer" data-depth="0.08" data-paint="assets/img/layer-1-chinook.webp" id="lyrChinook"></div>
-        <div class="layer" data-depth="0.15" data-paint="assets/img/layer-2-rockies.webp" id="lyrRockies"></div>
-        <div class="layer" data-depth="0.25" data-paint="assets/img/layer-3-foothills.webp" id="lyrFoothills"></div>
-        <div class="layer" data-depth="0.38" data-paint="assets/img/layer-4-city.webp" id="lyrCity"></div>
-        <div class="layer" data-depth="0.6" data-paint="assets/img/layer-5-foreground.webp" id="lyrFore"></div>
+        <figure class="hero-wick" aria-hidden="true">
+          <span class="hw-glow"></span>
+          <img class="hw-dusk" src="assets/img/wick-1.webp" alt="" width="600" height="706" />
+          <img class="hw-night" src="assets/img/wick-4.webp" alt="" width="704" height="760" />
+        </figure>
         <canvas class="snow" id="snow" aria-hidden="true"></canvas>
         <div class="hero-fade" aria-hidden="true"></div>
 
         <div class="hero-copy">
-          <p class="eyebrow"><span class="dot"></span> UXDC Designathon 2.0 · Human Connection</p>
+          <p class="eyebrow"><span class="dot"></span><span class="mono">UXDC Designathon 2.0</span><span class="sep"></span><span class="mono">Human Connection</span></p>
           <h1 class="title" aria-label="porchlight">
             <span class="ch">p</span><span class="ch">o</span><span class="ch">r</span><span class="ch">c</span><span class="ch">h</span><span class="ch">l</span><span class="ch ch-i">ı<span class="i-dot" aria-hidden="true"></span></span><span class="ch">g</span><span class="ch">h</span><span class="ch">t</span>
           </h1>
           <p class="hero-tag">Leave a light on.</p>
-          <p class="hero-sub">A campus app for the in-between hours: a quiet way to say <em>“I’m open to company”</em>, so nobody has to be the first to say hi.</p>
+          <p class="hero-sub">A campus app for the in-between hours: a quiet way to say <em>“I’m open to company,”</em> so nobody has to be the first to say hi.</p>
         </div>
 
-        <div class="scroll-cue" aria-hidden="true"><span>scroll into the evening</span><i></i></div>
-        <p class="hero-clock" aria-hidden="true"><span id="heroClock">4:10</span> pm · Calgary</p>
+        <div class="scroll-cue" aria-hidden="true"><i></i><span class="mono">Scroll into the evening</span></div>
+        <p class="hero-clock mono" aria-hidden="true"><span id="heroClock">4:10</span> pm <span class="sep"></span> Calgary <span class="sep"></span> −6°C</p>
       </div>
     </section>
 
     <!-- ============ 2. THE MOMENT ============ -->
     <section class="moment" id="moment" data-sky="dusk">
       <div class="moment-sticky">
-        <div class="moment-head">
-          <p class="kicker">01 — The moment</p>
-          <h2 class="h2 split">The in-between hour.</h2>
-        </div>
+        <header class="sec-head">
+          <p class="label"><span class="label-n">01</span>The moment</p>
+          <h2 class="h2 split">The <em>in-between</em> hour.</h2>
+        </header>
 
-        <div class="moment-stage">
-          <svg class="table-scene" viewBox="0 0 1200 520" role="img" aria-labelledby="tblTitle">
-            <title id="tblTitle">A long cafeteria table with students sitting one empty seat apart, each wearing headphones and looking at their phone.</title>
+        <div class="moment-stage" role="img" aria-label="Three little lanterns sit at a long cafeteria table, an empty chair between each of them. One hides behind a giant mug, one hugs its knees, one has fallen asleep on the table.">
+          <svg class="table" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
             <defs>
-              <linearGradient id="tblTop" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#6b4a7e"/><stop offset="1" stop-color="#3f2c5e"/></linearGradient>
-              <radialGradient id="phoneGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#9fd3ff" stop-opacity=".55"/><stop offset="1" stop-color="#9fd3ff" stop-opacity="0"/></radialGradient>
+              <linearGradient id="tTop" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#8a5d63" /><stop offset=".55" stop-color="#6b4256" /><stop offset="1" stop-color="#4b2d48" /></linearGradient>
+              <linearGradient id="tEdge" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#3d2440" /><stop offset="1" stop-color="#28182f" /></linearGradient>
+              <linearGradient id="chair" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#3b2f63" /><stop offset="1" stop-color="#2a2149" /></linearGradient>
+              <radialGradient id="tLight" cx=".5" cy="0" r=".9"><stop offset="0" stop-color="#ffcf8a" stop-opacity=".22" /><stop offset="1" stop-color="#ffcf8a" stop-opacity="0" /></radialGradient>
+              <filter id="paint" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="fractalNoise" baseFrequency=".022 .9" numOctaves="3" seed="7" result="n" />
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .14 0" result="grain" />
+                <feComposite in="grain" in2="SourceGraphic" operator="in" result="g2" />
+                <feBlend in="SourceGraphic" in2="g2" mode="multiply" result="b" />
+                <feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="3" result="w" />
+                <feDisplacementMap in="b" in2="w" scale="3.2" />
+              </filter>
             </defs>
-            <g id="tblPeople"></g>
-            <rect x="40" y="330" width="1120" height="34" rx="10" fill="url(#tblTop)" />
-            <rect x="40" y="362" width="1120" height="16" rx="6" fill="#2b1f45" />
-            <rect x="90" y="378" width="18" height="120" fill="#2b1f45" />
-            <rect x="1092" y="378" width="18" height="120" fill="#2b1f45" />
-            <g id="tblBubbles"></g>
+            <g class="chairs" filter="url(#paint)">
+              <g transform="translate(372 120)"><rect x="-58" y="0" width="116" height="122" rx="22" fill="url(#chair)" /><rect x="-46" y="12" width="92" height="10" rx="5" fill="#4a3d7a" opacity=".55" /></g>
+              <g transform="translate(828 120)"><rect x="-58" y="0" width="116" height="122" rx="22" fill="url(#chair)" /><rect x="-46" y="12" width="92" height="10" rx="5" fill="#4a3d7a" opacity=".55" /></g>
+            </g>
+            <g filter="url(#paint)">
+              <path d="M24 236 L1176 236 L1200 286 L0 286 Z" fill="url(#tTop)" />
+              <path d="M24 236 L1176 236 L1200 286 L0 286 Z" fill="url(#tLight)" />
+              <path d="M0 286 H1200 V306 H0 Z" fill="url(#tEdge)" />
+              <path d="M70 306 h22 l-6 114 h-10 Z M1108 306 h22 l-6 114 h-10 Z" fill="#241530" />
+              <path d="M520 306 h16 l-4 114 h-8 Z M664 306 h16 l-4 114 h-8 Z" fill="#1d1128" opacity=".7" />
+              <g stroke="#a7777a" stroke-width="1.2" fill="none" opacity=".35" stroke-linecap="round">
+                <path d="M60 248 C300 244 520 252 820 246 S1100 250 1150 247" />
+                <path d="M40 262 C260 258 600 268 900 260 S1120 266 1170 262" />
+                <path d="M30 274 C360 270 640 279 980 272" />
+              </g>
+            </g>
+            <ellipse cx="150" cy="240" rx="120" ry="7" fill="#1a0f22" opacity=".35" />
+            <ellipse cx="600" cy="240" rx="96" ry="7" fill="#1a0f22" opacity=".35" />
+            <ellipse cx="1040" cy="240" rx="120" ry="7" fill="#1a0f22" opacity=".35" />
           </svg>
+          <img class="mw mw-a" src="assets/img/wick-2.webp" alt="" width="794" height="757" loading="lazy" />
+          <img class="mw mw-b" src="assets/img/wick-1.webp" alt="" width="600" height="706" loading="lazy" />
+          <img class="mw mw-c" src="assets/img/wick-6.webp" alt="" width="709" height="607" loading="lazy" />
+          <p class="bubble b-a" style="--x: 16%; --y: 2%">is it weird to say hi?</p>
+          <p class="bubble b-b" style="--x: 50%; --y: -6%">wish someone sat here</p>
+          <p class="bubble b-c" style="--x: 85%; --y: 10%">they all have friends already</p>
         </div>
 
         <ol class="moment-lines" aria-label="The situation">
@@ -130,8 +160,13 @@
     <!-- ============ 3. WHY IT HAPPENS: C-Train arrival boards ============ -->
     <section class="why" id="why" data-sky="blue">
       <div class="wrap">
-        <p class="kicker">02 — Why it happens</p>
-        <h2 class="h2 split">It’s not that students don’t want to connect.<br /><span class="muted">It’s that nobody can tell who does.</span></h2>
+        <header class="sec-head sec-head-split">
+          <div>
+            <p class="label"><span class="label-n">02</span>Why it happens</p>
+            <h2 class="h2 split">It’s not that students don’t want to connect. <span class="muted">It’s that nobody can tell who does.</span></h2>
+          </div>
+          <p class="sec-aside">Two well-replicated findings from social psychology, one gap we kept hearing about, and the scale of the problem.</p>
+        </header>
 
         <div class="boards">
           <article class="board" data-board>
@@ -159,6 +194,7 @@
             <footer class="board-src">American College Health Association · National College Health Assessment II</footer>
           </article>
         </div>
+        <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>NEXT ARRIVAL · SOMEONE WHO ALSO WANTS TO TALK · PLATFORM 4 · ON TIME</span><span>MIND THE GAP BETWEEN YOU AND THE NEXT TABLE</span><span>PLEASE OFFER YOUR SEAT TO ANYONE WHO LOOKS LIKE THEY COULD USE A CHAT</span><span>NEXT ARRIVAL · SOMEONE WHO ALSO WANTS TO TALK · PLATFORM 4 · ON TIME</span><span>MIND THE GAP BETWEEN YOU AND THE NEXT TABLE</span><span>PLEASE OFFER YOUR SEAT TO ANYONE WHO LOOKS LIKE THEY COULD USE A CHAT</span></div></div>
 
         <!-- Filled from js/data.js → research.survey. Hidden until the team adds real numbers. -->
         <div class="our-research" id="ourResearch" hidden>
@@ -169,16 +205,19 @@
       </div>
     </section>
 
-    <!-- ============ 4. THE IDEA ============ -->
+    <!-- ============ 4. THE IDEA: a window opens onto the campus at night ============ -->
     <section class="idea" id="idea" data-sky="night">
-      <div class="idea-glow" aria-hidden="true"></div>
-      <div class="wrap idea-inner">
-        <p class="kicker">03 — The idea</p>
-        <div class="idea-lamp" aria-hidden="true">
-          <svg viewBox="0 0 32 32"><use href="#i-lamp" /></svg>
+      <div class="idea-pin">
+        <div class="idea-window">
+          <img class="idea-img" src="assets/img/campus-night.webp" alt="Painted panorama of a snowy university campus at blue hour, with the Rocky Mountains, downtown Calgary and warm street lamps along winding paths." width="2048" height="1144" loading="lazy" />
+          <div class="idea-shade" aria-hidden="true"></div>
         </div>
-        <h2 class="display split">Leave a light on.</h2>
-        <p class="lede">Porchlight lets you switch on a light at your table: a quiet, time-limited signal that you’re open to company. Anyone nearby can see it, walk over, and break the ice with a shared <em>Spark</em>. When the timer ends, the light goes out. No profiles to scroll, no swiping, no pressure.</p>
+        <div class="idea-copy">
+          <p class="label label-light"><span class="label-n">03</span>The idea</p>
+          <h2 class="display" id="ideaTitle">Leave a <em>light</em> on.</h2>
+          <p class="lede">Porchlight lets you switch on a light at your table: a quiet, time-limited signal that you’re open to company. Anyone nearby can see it, walk over, and break the ice with a shared <i>Spark</i>. When the timer ends, the light goes out. No profiles to scroll, no swiping, no pressure.</p>
+        </div>
+        <img class="idea-wick" src="assets/img/wick-3.webp" alt="" width="501" height="760" loading="lazy" aria-hidden="true" />
       </div>
     </section>
 
@@ -187,72 +226,94 @@
       <div class="wrap how-grid">
         <div class="how-phone-col">
           <div class="phone" id="howPhone">
+            <span class="phone-btn b1" aria-hidden="true"></span><span class="phone-btn b2" aria-hidden="true"></span><span class="phone-btn b3" aria-hidden="true"></span>
             <div class="phone-notch" aria-hidden="true"></div>
             <iframe id="howFrame" src="prototype/?embed=1" title="Porchlight interactive prototype" loading="lazy"></iframe>
           </div>
-          <p class="phone-hint hand">↑ it’s real, tap around</p>
+          <p class="phone-hint"><svg viewBox="0 0 60 40" aria-hidden="true"><path d="M50 34 C40 30 22 30 12 12 M12 12 l1 10 M12 12 l9 3" /></svg><span class="hand">it’s real, tap around</span></p>
         </div>
-        <ol class="how-steps">
-          <li class="how-step" data-screen="light-what">
-            <span class="step-n">01</span>
-            <h3>Light your lamp</h3>
-            <p>Three taps: where you are, what you’re up to, and for how long. “Eating lunch, two free seats 🍜.” Lights can only be placed at public campus spots.</p>
-          </li>
-          <li class="how-step" data-screen="map">
-            <span class="step-n">02</span>
-            <h3>See who’s open</h3>
-            <p>An illustrated campus map glows with every light that’s on right now. No feeds, no follower counts. Just warm windows in the dark.</p>
-          </li>
-          <li class="how-step" data-screen="forecast">
-            <span class="step-n">03</span>
-            <h3>Make a private guess</h3>
-            <p>Before you walk over, one tap: <i>how do you think this will go?</i> Only you ever see it. This is how Porchlight shows you your own liking gap.</p>
-          </li>
-          <li class="how-step" data-screen="onway">
-            <span class="step-n">04</span>
-            <h3>Walk over with a Spark</h3>
-            <p>You both get the same conversation starter, picked for the place and the moment, so the first thirty seconds aren’t awkward.</p>
-          </li>
-          <li class="how-step" data-screen="result">
-            <span class="step-n">05</span>
-            <h3>Kindle, then compare</h3>
-            <p>After the chat: how did it actually go? Seeing “I guessed 2, it was 4” again and again quietly rewires the fear of going first.</p>
-          </li>
-          <li class="how-step" data-screen="sky">
-            <span class="step-n">06</span>
-            <h3>Grow your night sky</h3>
-            <p>Keep the ember (only if you both want to) and they join your constellation. Over a semester your campus fills up with warm places and familiar faces.</p>
-          </li>
-        </ol>
+        <div class="how-steps-col">
+          <header class="sec-head">
+            <p class="label"><span class="label-n">04</span>How it works</p>
+            <h2 class="h2 split">Six small steps from <em>alone</em> to <em>together</em>.</h2>
+          </header>
+          <ol class="how-steps">
+            <li class="how-step" data-screen="light-what">
+              <span class="step-n mono">01 / 06</span>
+              <h3>Light your lamp</h3>
+              <p>Three taps: where you are, what you’re up to, and for how long. “Eating lunch, two free seats.” Lights can only be placed at public campus spots.</p>
+            </li>
+            <li class="how-step" data-screen="map">
+              <span class="step-n mono">02 / 06</span>
+              <h3>See who’s open</h3>
+              <p>An illustrated campus map glows with every light that’s on right now. No feeds, no follower counts. Just warm windows in the dark.</p>
+            </li>
+            <li class="how-step" data-screen="forecast">
+              <span class="step-n mono">03 / 06</span>
+              <h3>Make a private guess</h3>
+              <p>Before you walk over, one tap: <i>how do you think this will go?</i> Only you ever see it. This is how Porchlight shows you your own liking gap.</p>
+            </li>
+            <li class="how-step" data-screen="onway">
+              <span class="step-n mono">04 / 06</span>
+              <h3>Walk over with a Spark</h3>
+              <p>You both get the same conversation starter, picked for the place and the moment, so the first thirty seconds aren’t awkward.</p>
+              <img class="step-wick" src="assets/img/wick-5.webp" alt="" width="598" height="760" loading="lazy" aria-hidden="true" />
+            </li>
+            <li class="how-step" data-screen="result">
+              <span class="step-n mono">05 / 06</span>
+              <h3>Kindle, then compare</h3>
+              <p>After the chat: how did it actually go? Seeing “I guessed 2, it was 4” again and again quietly rewires the fear of going first.</p>
+            </li>
+            <li class="how-step" data-screen="sky">
+              <span class="step-n mono">06 / 06</span>
+              <h3>Grow your night sky</h3>
+              <p>Keep the ember (only if you both want to) and they join your constellation. Over a semester your campus fills up with warm places and familiar faces.</p>
+            </li>
+          </ol>
+        </div>
       </div>
     </section>
 
-    <!-- ============ 6. THREE DISCONNECTIONS ============ -->
+    <!-- ============ 6. THREE DISCONNECTIONS: paper postcards ============ -->
     <section class="three" id="three" data-sky="night">
       <div class="wrap">
-        <p class="kicker">04 — Three kinds of disconnection</p>
-        <h2 class="h2 split">One light, three ways back.</h2>
-        <div class="lanterns">
-          <article class="lantern-card" data-tilt>
-            <div class="lc-glow"></div>
-            <img class="lc-art" src="assets/img/card-1-each-other.webp" alt="" loading="lazy" onerror="this.remove()" onload="this.parentNode.classList.add('has-art')" />
-            <span class="lc-tag">from each other</span>
-            <h3>Lights</h3>
-            <p>A low-stakes, opt-in signal that turns a room of strangers into a room of possible conversations.</p>
+        <header class="sec-head sec-head-split">
+          <div>
+            <p class="label"><span class="label-n">05</span>Three kinds of disconnection</p>
+            <h2 class="h2 split">One light, <em>three</em> ways back.</h2>
+          </div>
+          <p class="sec-aside">The brief asks about feeling disconnected from other people, from a place, or from yourself. Porchlight answers each with the same small gesture.</p>
+        </header>
+        <div class="postcards">
+          <article class="postcard" data-tilt style="--r: -2.4deg">
+            <span class="tape" aria-hidden="true"></span>
+            <div class="pc-photo"><img src="assets/img/card-1-each-other.webp" alt="Two children in winter coats smile at each other beneath a glowing paper lantern." width="1200" height="896" loading="lazy" /></div>
+            <div class="pc-body">
+              <p class="pc-from"><span class="mono">No. 1</span><span class="hand">from each other</span></p>
+              <h3>Lights</h3>
+              <p>A low-stakes, opt-in signal that turns a room of strangers into a room of possible conversations.</p>
+            </div>
+            <span class="stamp" aria-hidden="true"><svg viewBox="0 0 32 32"><use href="#i-lamp" /></svg></span>
           </article>
-          <article class="lantern-card" data-tilt>
-            <div class="lc-glow"></div>
-            <img class="lc-art" src="assets/img/card-2-place.webp" alt="" loading="lazy" onerror="this.remove()" onload="this.parentNode.classList.add('has-art')" />
-            <span class="lc-tag">from a place</span>
-            <h3>Warm spots</h3>
-            <p>Every kindle warms the spot where it happened. Your map fills in with places that now mean something, and the campus learns where people actually gather.</p>
+          <article class="postcard" data-tilt style="--r: 1.6deg">
+            <span class="tape" aria-hidden="true"></span>
+            <div class="pc-photo"><img src="assets/img/card-2-place.webp" alt="A lantern shaped like a map pin floats above a cozy snow-covered campus building." width="1200" height="896" loading="lazy" /></div>
+            <div class="pc-body">
+              <p class="pc-from"><span class="mono">No. 2</span><span class="hand">from a place</span></p>
+              <h3>Warm spots</h3>
+              <p>Every kindle warms the spot where it happened. Your map fills in with places that now mean something, and the campus learns where people actually gather.</p>
+            </div>
+            <span class="stamp" aria-hidden="true"><svg viewBox="0 0 32 32"><use href="#i-lamp" /></svg></span>
           </article>
-          <article class="lantern-card" data-tilt>
-            <div class="lc-glow"></div>
-            <img class="lc-art" src="assets/img/card-3-self.webp" alt="" loading="lazy" onerror="this.remove()" onload="this.parentNode.classList.add('has-art')" />
-            <span class="lc-tag">from yourself</span>
-            <h3>Forecast vs. reality</h3>
-            <p>A private record of what you feared and what really happened. You start trusting yourself again because the evidence is your own.</p>
+          <article class="postcard" data-tilt style="--r: -1.2deg">
+            <span class="tape" aria-hidden="true"></span>
+            <div class="pc-photo"><img src="assets/img/card-3-self.webp" alt="A small lantern glows beside a puddle, its reflection shining a little brighter than the lantern itself." width="1200" height="896" loading="lazy" /></div>
+            <div class="pc-body">
+              <p class="pc-from"><span class="mono">No. 3</span><span class="hand">from yourself</span></p>
+              <h3>Forecast vs. reality</h3>
+              <p>A private record of what you feared and what really happened. You start trusting yourself again because the evidence is your own.</p>
+            </div>
+            <span class="stamp" aria-hidden="true"><svg viewBox="0 0 32 32"><use href="#i-lamp" /></svg></span>
           </article>
         </div>
       </div>
@@ -262,45 +323,67 @@
     <section class="sky" id="sky" data-sky="deep">
       <canvas id="skyCanvas" aria-hidden="true"></canvas>
       <div class="sky-copy">
-        <p class="kicker">05 — Every kindle draws a line</p>
-        <h2 class="display split">Strangers are just<br />stars you haven’t<br />connected yet.</h2>
-        <p class="sky-meta"><span class="hand">move your cursor, click to kindle</span> · <b id="skyCount">0</b> connections drawn</p>
+        <p class="label label-light"><span class="label-n">06</span>Every kindle draws a line</p>
+        <h2 class="display split">Strangers are just stars you haven’t <em>connected</em> yet.</h2>
+        <p class="sky-meta"><span class="hand">move your cursor, click to kindle</span><span class="sky-count mono"><b id="skyCount">0</b> connections drawn</span></p>
       </div>
     </section>
 
-    <!-- ============ 8. SAFETY ============ -->
+    <!-- ============ 8. SAFETY + PHYSICAL TWIN ============ -->
     <section class="safety" id="safety" data-sky="deep">
       <div class="wrap">
-        <p class="kicker">06 — Designed to feel safe</p>
-        <h2 class="h2 split">Warm, never exposed.</h2>
+        <header class="sec-head sec-head-split">
+          <div>
+            <p class="label"><span class="label-n">07</span>Designed to feel safe</p>
+            <h2 class="h2 split">Warm, never <em>exposed</em>.</h2>
+          </div>
+          <img class="safety-wick" src="assets/img/wick-6.webp" alt="" width="709" height="607" loading="lazy" aria-hidden="true" />
+        </header>
         <ul class="safe-grid">
-          <li><b>Verified campus email</b><span>Only students and staff with a university address can sign in.</span></li>
-          <li><b>Public spots only</b><span>Lights snap to around 40 mapped public places. Never residences, never exact GPS.</span></li>
-          <li><b>Lights fade out</b><span>Every light expires after 15 to 90 minutes. Nothing lingers on a map.</span></li>
-          <li><b>First name only</b><span>No photos required, no follower counts, no public history.</span></li>
-          <li><b>Leave in one tap</b><span>“I have to run” ends any meet-up politely. Block and report are always one tap away.</span></li>
-          <li><b>Physical twin</b><span>Lantern tokens on real tables mean the same thing, so you don’t need the app to join in.</span></li>
+          <li><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 9h22v15H5z M5 10l11 8 11-8" /><circle cx="25" cy="23" r="5" class="fill-ink" /><path d="M22.8 23l1.6 1.6 3-3.2" class="tick" /></svg><b>Verified campus email</b><span>Only students and staff with a university address can sign in.</span></li>
+          <li><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28s-8-8.4-8-14a8 8 0 0 1 16 0c0 5.6-8 14-8 14z" /><path d="M12 13h8v6h-8z M14 13v-2a2 2 0 0 1 4 0v2" /></svg><b>Public spots only</b><span>Lights snap to around 40 mapped public places. Never residences, never exact GPS.</span></li>
+          <li><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="17" r="10" /><path d="M16 11v6l4 3 M13 4h6" /></svg><b>Lights fade out</b><span>Every light expires after 15 to 90 minutes. Nothing lingers on a map.</span></li>
+          <li><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="11" r="5" /><path d="M7 27c1-5 4.5-8 9-8s8 3 9 8" /><path d="M4 4l24 24" class="strike" /></svg><b>First name only</b><span>No photos required, no follower counts, no public history.</span></li>
+          <li><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M13 6H7v20h6 M20 10l6 6-6 6 M26 16H12" /></svg><b>Leave in one tap</b><span>“I have to run” ends any meet-up politely. Block and report are always one tap away.</span></li>
+          <li><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M10 6h12l2 4v14l-2 2H10l-2-2V10z" /><path d="M12 22h3v3h-3z M17 22h3 M17 24h3" /><circle cx="16" cy="14" r="3.2" class="fill-amber" /></svg><b>Physical twin</b><span>Lantern tokens on real tables mean the same thing, so you don’t need the app to join in.</span></li>
         </ul>
+
+        <figure class="token">
+          <div class="token-img"><img src="assets/img/lantern-table-token.webp" alt="A frosted amber acrylic lantern token with a QR code on its base, glowing on a long wooden cafeteria table." width="1600" height="1195" loading="lazy" /></div>
+          <figcaption class="token-copy">
+            <p class="label"><span class="label-n">07b</span>Lantern Tables</p>
+            <h3 class="h3">Phone or no phone, the signal is the same.</h3>
+            <p>A 12&nbsp;cm frosted-acrylic lantern on a cafeteria table means <i>“come sit with us.”</i> Scan its base to see who’s there and for how long, or just walk over. Tokens live at Students’ Union tables in the busiest food courts.</p>
+            <dl class="specs">
+              <div><dt class="mono">Material</dt><dd>Frosted amber acrylic, LED base</dd></div>
+              <div><dt class="mono">Pilot</dt><dd>30 tokens · 3 food courts</dd></div>
+              <div><dt class="mono">Cost</dt><dd>≈ $18 each</dd></div>
+            </dl>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
-    <!-- ============ 9. ROADMAP: C-Train line ============ -->
+    <!-- ============ 9. ROADMAP: the Porchlight Line ============ -->
     <section class="roadmap" id="roadmap" data-sky="deep">
       <div class="roadmap-pin">
         <div class="wrap roadmap-head">
-          <p class="kicker">07 — Feasibility &amp; impact</p>
-          <h2 class="h2 split">Next stop: a real pilot.</h2>
+          <header class="sec-head">
+            <p class="label"><span class="label-n">08</span>Feasibility &amp; impact</p>
+            <h2 class="h2 split">Next stop: a <em>real</em> pilot.</h2>
+          </header>
+          <p class="line-badge"><span class="lb-dot"></span><span class="mono">Route 202 · Porchlight Line</span></p>
         </div>
         <div class="line-viewport">
           <div class="line-track" id="lineTrack">
             <div class="line-rail" aria-hidden="true"><span class="line-rail-fill"></span></div>
-            <div class="train" aria-hidden="true"><svg viewBox="0 0 120 40"><use href="#i-train" /></svg></div>
+            <div class="train" aria-hidden="true"><svg viewBox="0 0 220 60"><use href="#i-train" /></svg></div>
             <ol class="stations">
-              <li class="station"><span class="st-dot"></span><span class="st-when">Nov 2026</span><h3>Prototype</h3><p>Concept, research and an interactive prototype, built this weekend.</p></li>
-              <li class="station"><span class="st-dot"></span><span class="st-when">Jan 2027</span><h3>Club pilot</h3><p>A web app (PWA) with campus sign-in, 40 mapped spots, and two partner clubs. Real-time backend on a free tier, about $0–25 a month.</p></li>
-              <li class="station"><span class="st-dot"></span><span class="st-when">Feb 2027</span><h3>Lantern Tables</h3><p>We partner with the Students’ Union to put physical lantern tokens with QR codes on cafeteria tables. Phone or no phone, the signal is the same.</p></li>
-              <li class="station"><span class="st-dot"></span><span class="st-when">Mar 2027</span><h3>Measure</h3><p>A 3-item UCLA loneliness score before and after the pilot, weekly kindles, repeat meetups, and the liking-gap trend.</p></li>
-              <li class="station"><span class="st-dot"></span><span class="st-when">Fall 2027</span><h3>Every campus in the city</h3><p>Open it up to other Calgary campuses, with orientation-week “first light” events for new students.</p></li>
+              <li class="station"><span class="st-dot"></span><span class="st-when mono">Nov 2026</span><h3>Prototype</h3><p>Concept, research and an interactive prototype, built this weekend.</p></li>
+              <li class="station"><span class="st-dot"></span><span class="st-when mono">Jan 2027</span><h3>Club pilot</h3><p>A web app (PWA) with campus sign-in, 40 mapped spots and two partner clubs. Real-time backend on a free tier, about $0–25 a month.</p></li>
+              <li class="station"><span class="st-dot"></span><span class="st-when mono">Feb 2027</span><h3>Lantern Tables</h3><p>We partner with the Students’ Union to put lantern tokens with QR codes on cafeteria tables.</p></li>
+              <li class="station"><span class="st-dot"></span><span class="st-when mono">Mar 2027</span><h3>Measure</h3><p>A 3-item UCLA loneliness score before and after the pilot, weekly kindles, repeat meetups and the liking-gap trend.</p></li>
+              <li class="station"><span class="st-dot"></span><span class="st-when mono">Fall 2027</span><h3>Every campus in the city</h3><p>Open it up to other Calgary campuses, with orientation-week “first light” events for new students.</p></li>
             </ol>
           </div>
         </div>
@@ -309,18 +392,34 @@
 
     <!-- ============ 10. END ============ -->
     <section class="end" id="end" data-sky="deep">
+      <div class="end-bg" aria-hidden="true"><img src="assets/img/campus-bench.webp" alt="" width="2048" height="1144" loading="lazy" /></div>
       <canvas id="lanternCanvas" aria-hidden="true"></canvas>
       <div class="end-copy">
-        <h2 class="display split">Someone in this room<br />is hoping you’ll say hi.</h2>
+        <img class="end-wick" src="assets/img/wick-4.webp" alt="" width="704" height="760" loading="lazy" aria-hidden="true" />
+        <h2 class="display split">Someone in this room is hoping you’ll say <em>hi</em>.</h2>
         <div class="end-ctas">
-          <a class="btn btn-glow btn-xl" href="prototype/" data-magnetic>Try the prototype <span aria-hidden="true">→</span></a>
-          <a class="btn btn-ghost" href="docs/CONCEPT.md" data-magnetic>Read the case study</a>
+          <a class="btn btn-glow btn-xl" href="prototype/" data-magnetic>Try the prototype <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" /></svg></a>
+          <a class="btn btn-ghost" id="caseStudyLink" href="docs/CONCEPT.md" data-magnetic>Read the case study</a>
         </div>
         <p class="hand end-note">click anywhere to release a lantern</p>
       </div>
       <footer class="footer">
-        <span>Porchlight · UXDC Designathon 2.0 · Theme: Human Connection</span>
-        <span id="teamLine"></span>
+        <div class="f-brand">
+          <span class="logo-word">porchl<span class="logo-i">ı</span>ght</span>
+          <span class="mono">Leave a light on.</span>
+        </div>
+        <div class="f-col">
+          <span class="mono f-h">Project</span>
+          <a href="prototype/">Interactive prototype</a>
+          <a id="footCase" href="docs/CONCEPT.md">Case study</a>
+          <a href="https://github.com/Viktor-Nedev/porchlight">Source on GitHub</a>
+        </div>
+        <div class="f-col">
+          <span class="mono f-h">Event</span>
+          <span>UXDC Designathon 2.0</span>
+          <span>Theme · Human Connection</span>
+          <span id="teamLine">University of Calgary · Nov 2026</span>
+        </div>
       </footer>
     </section>
   </main>
@@ -328,21 +427,24 @@
   <!-- Shared icons -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="i-lamp" viewBox="0 0 32 32">
-      <path d="M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-      <path d="M10 6h12l3 7H7z" fill="currentColor" opacity=".9"/>
-      <path d="M16 13c-5 0-7.5 3.5-7.5 7.5 0 3.3 2.3 5.6 4.3 7h6.4c2-1.4 4.3-3.7 4.3-7 0-4-2.5-7.5-7.5-7.5z" fill="#ffc35c"/>
-      <circle cx="16" cy="20.5" r="3" fill="#fff3c9"/>
-      <rect x="12.5" y="27.5" width="7" height="2.5" rx="1" fill="currentColor"/>
+      <path d="M16 2.5v3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+      <path d="M10.5 6h11l2.5 6.5H8z" fill="currentColor" />
+      <path d="M16 12.5c-4.8 0-7.4 3.3-7.4 7.4 0 3.2 2.2 5.6 4.2 7h6.4c2-1.4 4.2-3.8 4.2-7 0-4.1-2.6-7.4-7.4-7.4z" fill="#ffc35c" />
+      <circle cx="16" cy="20" r="2.8" fill="#fff3c9" />
+      <rect x="12.6" y="27.2" width="6.8" height="2.4" rx="1.1" fill="currentColor" />
     </symbol>
-    <symbol id="i-train" viewBox="0 0 120 40">
-      <rect x="2" y="6" width="116" height="26" rx="8" fill="#e8384f"/>
-      <rect x="2" y="22" width="116" height="4" fill="#b8213a"/>
-      <rect x="10" y="11" width="16" height="9" rx="2" fill="#ffe7a8"/>
-      <rect x="32" y="11" width="16" height="9" rx="2" fill="#ffe7a8"/>
-      <rect x="54" y="11" width="16" height="9" rx="2" fill="#ffe7a8"/>
-      <rect x="76" y="11" width="16" height="9" rx="2" fill="#ffe7a8"/>
-      <path d="M100 11h10a6 6 0 0 1 6 6v3h-16z" fill="#ffe7a8"/>
-      <circle cx="24" cy="35" r="4" fill="#1a1530"/><circle cx="96" cy="35" r="4" fill="#1a1530"/>
+    <symbol id="i-train" viewBox="0 0 220 60">
+      <defs><linearGradient id="trainSheen" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22" /><stop offset=".5" stop-color="#fff" stop-opacity="0" /></linearGradient></defs>
+      <path d="M98 14 l8 -9 h10 l-6 9" stroke="#8f86c4" stroke-width="2" fill="none" stroke-linejoin="round" /><path d="M101 5 h20" stroke="#8f86c4" stroke-width="2" stroke-linecap="round" />
+      <path d="M8 18 h178 c14 0 24 8 26 22 v6 H8 z" fill="#e8384f" />
+      <path d="M8 18 h178 c14 0 24 8 26 22 v6 H8 z" fill="url(#trainSheen)" />
+      <rect x="8" y="38" width="204" height="5" fill="#b8213a" />
+      <rect x="8" y="14" width="160" height="5" rx="2" fill="#f2f0f7" />
+      <g fill="#ffe7a8"><rect x="18" y="23" width="22" height="11" rx="2.5" /><rect x="46" y="23" width="22" height="11" rx="2.5" /><rect x="74" y="23" width="22" height="11" rx="2.5" /><rect x="112" y="23" width="22" height="11" rx="2.5" /><rect x="140" y="23" width="22" height="11" rx="2.5" /></g>
+      <rect x="101" y="21" width="7" height="19" rx="1.5" fill="#9b1d32" />
+      <path d="M176 23 h10 c9 0 15 5 17 12 h-27 z" fill="#ffe7a8" />
+      <g fill="#3d2a4a" opacity=".55"><circle cx="30" cy="28" r="3" /><circle cx="59" cy="28" r="3" /><circle cx="150" cy="28" r="3" /></g>
+      <g fill="#1a1530"><circle cx="34" cy="50" r="6" /><circle cx="58" cy="50" r="6" /><circle cx="160" cy="50" r="6" /><circle cx="184" cy="50" r="6" /></g>
     </symbol>
   </svg>
 
@@ -351,7 +453,6 @@
   <script src="js/vendor/SplitText.min.js"></script>
   <script src="js/vendor/lenis.min.js"></script>
   <script src="js/data.js"></script>
-  <script src="js/scene.js"></script>
   <script src="js/site.js"></script>
 </body>
 </html>
