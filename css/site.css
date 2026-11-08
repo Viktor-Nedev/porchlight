@@ -447,3 +447,58 @@ em { font-style: italic; color: var(--amber-300); }
 @media (max-width: 760px) {
   .idea-shade { background: linear-gradient(180deg, rgba(9, 7, 28, .55) 0%, rgba(9, 7, 28, .82) 30%, rgba(9, 7, 28, .78) 62%, rgba(9, 7, 28, .2) 85%); }
 }
+
+/* ---------- 2b. moment backdrop: the food court ---------- */
+.moment-room { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.moment-room svg { width: 100%; height: 100%; display: block; }
+.moment-sticky > :not(.moment-room) { position: relative; z-index: 1; }
+.moment-sticky .sec-head { text-shadow: 0 2px 24px rgba(20, 14, 50, .8); }
+.moment-lines { text-shadow: 0 2px 20px rgba(13, 11, 33, .9); }
+.r-star { fill: #fff; animation: rTw 3s ease-in-out infinite alternate; }
+@keyframes rTw { from { opacity: .3; } to { opacity: 1; } }
+.r-flake { fill: #fff; opacity: .8; animation: rSnow linear infinite; }
+@keyframes rSnow { from { transform: translateY(-40px); } to { transform: translateY(420px); } }
+.r-citylight { fill: #ffc35c; animation: rTw 4s ease-in-out infinite alternate; }
+.r-frame { fill: none; stroke: #4a3f86; stroke-width: 10; }
+.r-mullion { fill: none; stroke: #4a3f86; stroke-width: 5; }
+.r-sill { fill: #4a3f86; }
+.r-sillsnow { fill: none; stroke: #d9d2f2; stroke-width: 5; stroke-linecap: round; }
+.r-glare { stroke: #fff; stroke-width: 6; opacity: .06; stroke-linecap: round; }
+.r-patch { fill: #8f86d6; opacity: .05; }
+.r-cord { stroke: #120f2c; stroke-width: 2; }
+.r-shade { fill: #1b1538; stroke: #4a3f86; stroke-width: 2; }
+.r-bulb { fill: #ffe7a8; filter: drop-shadow(0 0 10px #ffc35c); }
+.r-lamp { animation: rSway 7s ease-in-out infinite; transform-origin: 50% 0; transform-box: view-box; }
+@keyframes rSway { 50% { transform: rotate(.4deg); } }
+.r-clock-rim { fill: #3a3070; }
+.r-clock-face { fill: #f4ecdf; }
+.r-tick { stroke: #3a3070; stroke-width: 2.4; stroke-linecap: round; }
+.r-hour { stroke: #241a3f; stroke-width: 5; stroke-linecap: round; }
+.r-min { stroke: #241a3f; stroke-width: 3; stroke-linecap: round; }
+.r-pin { fill: #e8607a; }
+.r-menu-bg { fill: #3a3070; }
+.r-menu-in { fill: #161229; }
+.r-menu-title { font: 16px "DotGothic16", monospace; fill: #ffb547; text-anchor: middle; letter-spacing: 3px; }
+.r-menu-rule { stroke: #3a3070; stroke-width: 1.5; stroke-dasharray: 4 3; }
+.r-menu-line { font: 11px "DotGothic16", monospace; fill: #d9d2ea; letter-spacing: 1px; }
+.r-menu-price { font: 11px "DotGothic16", monospace; fill: #5cc2b6; text-anchor: end; }
+.r-board-frame { fill: #4a3f86; }
+.r-cork { fill: #8a6450; }
+.r-note { filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .35)); }
+.r-note-t { font: 11px "Caveat", cursive; font-weight: 700; fill: #3a2f4c; text-anchor: middle; }
+.r-tack { fill: #e8607a; }
+.r-wainscot { fill: #241c4c; }
+.r-rail { stroke: #4a3f86; stroke-width: 6; }
+.r-slat { stroke: #1d1640; stroke-width: 2; }
+.r-floorline { stroke: #2b2358; stroke-width: 1.2; opacity: .55; }
+.r-table { fill: #1a1438; }
+.r-person { fill: #1d1742; }
+.r-phones { fill: none; stroke: #120f2c; stroke-width: 4; }
+.r-phone { fill: #9fd3ff; }
+.r-glow { fill: #9fd3ff; opacity: .2; filter: blur(4px); animation: rGlow 3s ease-in-out infinite alternate; }
+@keyframes rGlow { from { opacity: .12; } to { opacity: .32; } }
+.r-people { opacity: .9; }
+.r-pot { fill: #4a3f86; }
+.r-stem { fill: none; stroke: #23704f; stroke-width: 3; }
+.r-leaf { fill: #2e8a63; }
+@media (prefers-reduced-motion: reduce) { .r-flake, .r-lamp, .r-star, .r-glow, .r-citylight { animation: none; } }
