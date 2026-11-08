@@ -1,6 +1,6 @@
 # Research kit (run it tonight)
 
-The Experienced track scores **User Research & Problem Validation** out of 10. The citations in the concept back up the *why*. This kit gets you the *who* and *how many*, from your own campus, in a few hours.
+The Beginner rubric scores **Problem Definition & Understanding** out of 10, asking for a problem “supported by relevant evidence”. The published data in `RESEARCH.md` already covers that; a quick survey adds your own voice on top. This kit gets you the *who* and *how many*, from your own campus, in a few hours.
 
 ## 1. Quick survey (Google Form, ~2 min to answer)
 

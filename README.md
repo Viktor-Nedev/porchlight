@@ -6,7 +6,7 @@
 
 A campus app for the in-between hours: a quiet way to say *“I’m open to company,”* so nobody has to be the first to say hi.
 
-**UXDC Designathon 2.0 · Theme: Human Connection · Experienced track**
+**UXDC Designathon 2.0 · Theme: Human Connection · Beginner track**
 
 [**Live story site**](https://viktor-nedev.github.io/porchlight/) · [**Interactive prototype**](https://viktor-nedev.github.io/porchlight/prototype/) · [**Research**](docs/RESEARCH.md) · [**Case study**](docs/CONCEPT.md) · [**Design file (PDF)**](submission/porchlight-design-file.pdf)
 
@@ -60,13 +60,12 @@ Full research, competitive analysis and design iterations: [`docs/RESEARCH.md`](
 
 ## Submission
 
-| Required (Experienced track) | Where |
+| Required (Beginner track) | Where |
 |---|---|
-| Presentation: research, process, solution | Slides deck (15 slides), exported to PDF/PPTX in the Google Drive folder |
-| Interactive prototype | [`prototype/`](prototype/) · [live](https://viktor-nedev.github.io/porchlight/prototype/) |
-| Demo video (~2 min) | `submission/porchlight-demo.mp4` + narration from [`submission/VOICEOVER.md`](submission/VOICEOVER.md) |
-| Codebase | this repository |
+| Presentation: problem, research, solution, design decisions (4 min) | Slides deck (14 slides), exported to PDF/PPTX in the Google Drive folder; script in [`submission/SCRIPT.md`](submission/SCRIPT.md) |
+| Walkthrough of the main feature | Slides 8–9 (two user flows) and the [clickable prototype](https://viktor-nedev.github.io/porchlight/prototype/) |
 | Design files | [`submission/porchlight-design-file.pdf`](submission/porchlight-design-file.pdf), `assets/img/`, `images/` |
+| Extras | Live story site, full codebase, a prototype walkthrough video (`submission/porchlight-demo.mp4`) |
 
 Checklist and Devpost text: [`submission/SUBMISSION.md`](submission/SUBMISSION.md).
 
@@ -85,7 +84,7 @@ docs/CONCEPT.md         Case study: problem, persona, solution, decisions, feasi
 docs/PITCH.md           Slide plan, timing and Devpost text
 docs/RESEARCH_KIT.md    Optional student survey and interview kit
 docs/IMAGE_PROMPTS*.md  Art direction and every illustration prompt
-submission/             Design-file PDF, demo video, voice-over script, checklist
+submission/             Design-file PDF, presentation script, checklist, walkthrough video
 ```
 
 ## Run it locally

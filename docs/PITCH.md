@@ -1,11 +1,11 @@
 # Pitch & submission
 
-**Experienced track:** 6-minute presentation including a ~2-minute demo video, then 3 minutes of Q&A.
+**Beginner track:** about 6 minutes in total: **4-minute presentation**, then **2 minutes of Q&A**. No video is required.
 **Deadline:** Devpost + Google Form, **Sunday Nov 8, 12:00 PM**.
 
-## Slide plan (6:00 total = 4:00 talking + 2:00 video, then 3:00 Q&A)
+## Slide plan (4:00)
 
-The deck is the Slides artifact “Porchlight — Leave a light on” (15 slides, speaker notes on every slide).
+The deck is the Slides artifact “Porchlight — Leave a light on” (14 slides, speaker notes on every slide). Word-for-word script: [`submission/SCRIPT.md`](../submission/SCRIPT.md).
 
 | # | Time | Slide | Key line |
 |---|---|---|---|
@@ -14,20 +14,19 @@ The deck is the Slides artifact “Porchlight — Leave a light on” (15 slides
 | 3 | 0:35 | Research | 69.6% of Canadian students felt very lonely last year; 65% at UCalgary. |
 | 4 | 0:55 | Competitive analysis | Nothing is right now, in person and no-commitment. |
 | 5 | 1:10 | Key insights | No signal → light; liking gap → forecast; first 30 s → Spark. |
-| 6 | 1:25 | Persona: Sam | Low effort, low risk, no commitment, now. |
-| 7 | 1:35 | The idea | “Leave a light on.” Pause. |
-| 8 | 1:45 | How it works | Five screens; the video shows it live. |
-| 9 | 1:55 | **Demo video (≈ 2:00)** | Voice-over: `submission/VOICEOVER.md`. |
-| 10 | 3:55 | Design process | Tested at three sizes, fixed what broke. |
-| 11 | 4:15 | One light, three ways back | Others / a place / yourself. |
-| 12 | 4:35 | Key design decisions | Expiring lights and the private forecast. |
-| 13 | 4:55 | Feasibility | Web app + free tier + Lantern Table tokens. |
-| 14 | 5:20 | Impact & roadmap | Pilot in January; loneliness score as the main metric. |
-| 15 | 5:45 | Close | “Someone in this room is hoping you’ll say hi.” |
+| 6 | 1:30 | Persona: Sam | Low effort, low risk, no commitment, now. |
+| 7 | 1:45 | The idea | “Leave a light on.” Pause. |
+| 8 | 2:05 | User flow: joining a light | Map → Maya → private guess → Spark → compare. |
+| 9 | 2:30 | User flow: after + hosting | Night sky; light your own lamp in 4 taps. |
+| 10 | 2:55 | One light, three ways back | Others / a place / yourself. |
+| 11 | 3:15 | Key design decisions | Expiring lights, public spots, private forecast. |
+| 12 | 3:30 | Feasibility | Web app + free tier + lantern tokens. |
+| 13 | 3:45 | Impact & roadmap | Pilot in January; loneliness score as the main metric. |
+| 14 | 3:55 | Close | “Someone in this room is hoping you’ll say hi.” |
 
-## Demo video
+## Optional extra: prototype walkthrough video
 
-Recorded walkthrough: `submission/porchlight-demo.mp4` (1:50). Timed narration, line by line: [`submission/VOICEOVER.md`](../submission/VOICEOVER.md).
+Not required for the Beginner track. A silent 1:50 recording is in `submission/porchlight-demo.mp4`, with timed narration in [`submission/VOICEOVER.md`](../submission/VOICEOVER.md), if you want to add it to the Drive folder.
 
 ## Devpost text (draft)
 

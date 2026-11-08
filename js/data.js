@@ -6,7 +6,7 @@ window.PORCHLIGHT = {
   team: {
     // e.g. ["Viktor N.", "Teammate 2"] — shown in the footer
     members: [],
-    track: "Experienced Track",
+    track: "Beginner Track",
   },
 
   links: {
